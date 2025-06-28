@@ -362,7 +362,6 @@ const DataTable = () => {
     setColumnsVisibility((prev) => ({ ...prev, [column]: !prev[column] }));
   };
 
-  const totalPages = Math.ceil(totalRecords / perPage);
   const [motifDetails, setMotifDetails] = useState(null);
 
   const fetchMotifDetails = async (motifId) => {
