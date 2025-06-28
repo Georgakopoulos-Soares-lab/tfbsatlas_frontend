@@ -1,0 +1,19 @@
+.btn {
+  display: inline-block;
+  text-align: center;
+  background-color: var(--color-primary);
+  color: #fff;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: transform 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  background-color: var(--color-link);
+}
+
+.btn-disabled {
+  background-color: var(--color-border);
+  cursor: not-allowed;
+}

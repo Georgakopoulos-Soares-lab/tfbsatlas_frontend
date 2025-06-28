@@ -1,0 +1,64 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^1.7.9",
+    "bootstrap": "^5.3.3",
+    "chart.js": "^4.4.7",
+    "chartjs-plugin-annotation": "^3.1.0",
+    "clsx": "^2.1.1",
+    "cra-template": "1.2.0",
+    "cytoscape": "^3.30.4",
+    "d3": "^7.9.0",
+    "echarts": "^5.6.0",
+    "echarts-for-react": "^3.0.2",
+    "file-saver": "^2.0.5",
+    "plotly.js": "^3.0.1",
+    "react": "^18.0.0",
+    "react-bootstrap": "^2.10.6",
+    "react-chartjs-2": "^5.2.0",
+    "react-chord-diagram": "^2.0.0",
+    "react-cytoscapejs": "^2.0.0",
+    "react-dom": "^18.0.0",
+    "react-modal": "^3.16.3",
+    "react-plotly.js": "^2.6.0",
+    "react-router-dom": "^6.28.0",
+    "react-scripts": "5.0.1",
+    "react-select": "^5.9.0",
+    "react-table": "^7.8.0"
+  },
+  "scripts": {
+    "dev": "nodemon --watch src --ignore node_modules --ext js,jsx,css,html,json --delay 100ms --exec \"react-scripts start\"",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "eslint-plugin-react": "^7.37.2",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.4.2"
+  }
+}

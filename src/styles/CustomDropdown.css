@@ -1,0 +1,134 @@
+/* Wrapper for dropdown */
+.custom-dropdown {
+    position: relative;
+    max-width: 300px;
+    margin: 0 auto;
+    font-family: "Poppins", sans-serif;
+    font-size: 1.1rem;
+    color: #343a40;
+}
+
+/* Header (selected option) */
+.dropdown-header {
+    background: #f8f9fa;
+    border: 2px solid #4a6fa5;
+    border-radius: 25px;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    gap: 24px;
+    white-space: break-spaces;
+}
+
+.dropdown-header.open {
+    border-color: #4a6fa5;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+}
+
+.dropdown-header span {
+    font-weight: 500;
+    color: #343a40;
+}
+
+/* Arrow icon */
+.arrow {
+    border: solid #4a6fa5;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transition: transform 0.3s ease;
+}
+
+.arrow.up {
+    transform: rotate(-135deg);
+}
+
+.arrow.down {
+    transform: rotate(45deg);
+}
+
+/* Dropdown list */
+.dropdown-list {
+    position: absolute;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border: 2px solid #4a6fa5;
+    border-radius: 15px;
+    padding: 10px 0;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+    width: 250px;
+    min-width: 180px;
+}
+
+.dropdown-list.show_input {
+    top: calc(100% + 50px);
+}
+
+.dropdown-list.hide_input {
+    top: calc(100% + 5px);
+}
+
+
+/* Dropdown items */
+.dropdown-item {
+    padding: 10px 20px;
+    color: #343a40;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: normal
+}
+
+.dropdown-item:hover {
+    background-color: #e9f5ff;
+    color: #007bff;
+}
+
+.dropdown-item:active {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+/* Styling the scrollbar */
+.dropdown-list::-webkit-scrollbar {
+    width: 8px;
+    /* Slightly wider scrollbar for easier use */
+}
+
+.dropdown-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* Light background for the track */
+    border-radius: 10px;
+    /* Matches the thumb's roundness */
+    margin-top: 10px;
+    /* Shifts scrollbar downward */
+    margin-bottom: 10px;
+}
+
+.dropdown-list::-webkit-scrollbar-thumb {
+    background: #4a6fa5;
+    /* Matches the theme color */
+    border-radius: 10px;
+    /* Rounded thumb for better aesthetics */
+    border: 2px solid #f1f1f1;
+    /* Creates padding around the thumb */
+}
+
+/* Hover effect on scrollbar thumb */
+.dropdown-list::-webkit-scrollbar-thumb:hover {
+    background: #0056b3;
+    /* Darker blue on hover */
+}
+
+/* Optional: Handle for other browsers */
+.dropdown-list::-moz-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #4a6fa5 #f1f1f1;
+}

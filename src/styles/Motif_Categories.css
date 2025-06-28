@@ -1,0 +1,87 @@
+/* Motif Categories Section */
+.motif-categories {
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* Card Styling with Background Image */
+.category-card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    background: url('https://images.phylopic.org/images/4f6f2bcc-3bb5-4c1f-8eb1-1db833405861/raster/1024x759.png?v=1926fdb3ba0') no-repeat center center;
+    background-size: cover;
+    /* Ensure the image covers the card area */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 200px;
+    /* Fixed height for visual consistency */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    color: white;
+    /* White text for readability on dark background */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+    /* Add text shadow for clarity */
+}
+
+/* Card Title Styling */
+.category-card .card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    z-index: 2;
+    /* Ensure the title stays on top */
+}
+
+/* Card Overlay for Better Readability */
+.category-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    /* Place the overlay under the text */
+}
+
+/* Button Styling */
+.category-card .btn-primary {
+    z-index: 2;
+    background-color: #007bff;
+    border: none;
+    font-size: 0.9rem;
+    padding: 8px 20px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.category-card .btn-primary:hover {
+    background-color: #0056b3;
+    transform: scale(1.1);
+}
+
+/* Card Hover Effects */
+.category-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+.card-body {
+    background-color: transparent;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .category-card {
+        height: 150px;
+        /* Reduce height for smaller screens */
+    }
+
+    .category-card .card-title {
+        font-size: 1rem;
+    }
+}

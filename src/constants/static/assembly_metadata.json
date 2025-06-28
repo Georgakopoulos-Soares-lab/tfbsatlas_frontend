@@ -1,0 +1,2026 @@
+﻿[
+  {
+    "assembly_accession": "GCA_000001405",
+    "taxid": "9606",
+    "organism_name": "Homo sapiens",
+    "genome_size": "3099734149",
+    "genome_size_ungapped": "2948611470",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_000164785",
+    "taxid": "9358",
+    "organism_name": "Choloepus hoffmanni",
+    "genome_size": "3286013499",
+    "genome_size_ungapped": "3223352558",
+    "gc_percentage": "40"
+  },
+  {
+    "assembly_accession": "GCA_000165445",
+    "taxid": "30608",
+    "organism_name": "Microcebus murinus",
+    "genome_size": "2487392024",
+    "genome_size_ungapped": "2386304861",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_000181375",
+    "taxid": "37347",
+    "organism_name": "Tupaia belangeri",
+    "genome_size": "2137225476",
+    "genome_size_ungapped": "2137225476",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_000247795",
+    "taxid": "9915",
+    "organism_name": "Bos indicus",
+    "genome_size": "2673949103",
+    "genome_size_ungapped": "2475812658",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_000264685",
+    "taxid": "9555",
+    "organism_name": "Papio anubis",
+    "genome_size": "2959356508",
+    "genome_size_ungapped": "2936988423",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_000465285",
+    "taxid": "77214",
+    "organism_name": "Eidolon helvum",
+    "genome_size": "1837754460",
+    "genome_size_ungapped": "1830434665",
+    "gc_percentage": "39"
+  },
+  {
+    "assembly_accession": "GCA_000465405",
+    "taxid": "59476",
+    "organism_name": "Pteronotus parnellii",
+    "genome_size": "1960317893",
+    "genome_size_ungapped": "1946616672",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_000688575",
+    "taxid": "37548",
+    "organism_name": "Cavia aperea",
+    "genome_size": "2716396567",
+    "genome_size_ungapped": "1750278608",
+    "gc_percentage": "40"
+  },
+  {
+    "assembly_accession": "GCA_000738955",
+    "taxid": "143292",
+    "organism_name": "Manis pentadactyla",
+    "genome_size": "2204732179",
+    "genome_size_ungapped": "1999057008",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_000767525",
+    "taxid": "273913",
+    "organism_name": "Vicugna pacos huacaya",
+    "genome_size": "2013701362",
+    "genome_size_ungapped": "2001161349",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_000952055",
+    "taxid": "37293",
+    "organism_name": "Aotus nancymaae",
+    "genome_size": "2861668348",
+    "genome_size_ungapped": "2714423021",
+    "gc_percentage": "40.5"
+  },
+  {
+    "assembly_accession": "GCA_000978405",
+    "taxid": "9923",
+    "organism_name": "Capra aegagrus",
+    "genome_size": "2828873048",
+    "genome_size_ungapped": "2593727656",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCA_000978805",
+    "taxid": "33556",
+    "organism_name": "Balaenoptera bonaerensis",
+    "genome_size": "2234641557",
+    "genome_size_ungapped": "2220306123",
+    "gc_percentage": "40.5"
+  },
+  {
+    "assembly_accession": "GCA_001262665",
+    "taxid": "87288",
+    "organism_name": "Eulemur flavifrons",
+    "genome_size": "2115566677",
+    "genome_size_ungapped": "2094235796",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_001624865",
+    "taxid": "10096",
+    "organism_name": "Mus spretus",
+    "genome_size": "2625571169",
+    "genome_size_ungapped": "2338248639",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_001651235",
+    "taxid": "439328",
+    "organism_name": "Giraffa tippelskirchi",
+    "genome_size": "2705072464",
+    "genome_size_ungapped": "2611125393",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_001660835",
+    "taxid": "86973",
+    "organism_name": "Okapia johnstoni",
+    "genome_size": "2878133036",
+    "genome_size_ungapped": "2738624213",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_001685075",
+    "taxid": "3370998",
+    "organism_name": "Bramus lutescens",
+    "genome_size": "2353188398",
+    "genome_size_ungapped": "2260197146",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_001685095",
+    "taxid": "329620",
+    "organism_name": "Ellobius talpinus",
+    "genome_size": "2265966243",
+    "genome_size_ungapped": "2243796346",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_001857705",
+    "taxid": "9691",
+    "organism_name": "Panthera pardus",
+    "genome_size": "2578002243",
+    "genome_size_ungapped": "2478848778",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_001887905",
+    "taxid": "9622",
+    "organism_name": "Lycaon pictus",
+    "genome_size": "2358127109",
+    "genome_size_ungapped": "2187443991",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_001888835",
+    "taxid": "89399",
+    "organism_name": "Rhinolophus sinicus",
+    "genome_size": "2073344508",
+    "genome_size_ungapped": "2015329797",
+    "gc_percentage": "40.5"
+  },
+  {
+    "assembly_accession": "GCA_001890085",
+    "taxid": "186990",
+    "organism_name": "Hipposideros armiger",
+    "genome_size": "2236564388",
+    "genome_size_ungapped": "1954830665",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_002007445",
+    "taxid": "9646",
+    "organism_name": "Ailuropoda melanoleuca",
+    "genome_size": "2440260518",
+    "genome_size_ungapped": "2393570281",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_002007465",
+    "taxid": "424585",
+    "organism_name": "Ailurus styani",
+    "genome_size": "2342939051",
+    "genome_size_ungapped": "2308986644",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_002102435",
+    "taxid": "9880",
+    "organism_name": "Odocoileus virginianus texanus",
+    "genome_size": "2380489210",
+    "genome_size_ungapped": "2358998439",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_002201575",
+    "taxid": "29088",
+    "organism_name": "Neomonachus schauinslandi",
+    "genome_size": "2419443398",
+    "genome_size_ungapped": "2376537768",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_002201775",
+    "taxid": "9899",
+    "organism_name": "Ammotragus lervia",
+    "genome_size": "2650836958",
+    "genome_size_ungapped": "2543508103",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCA_002215935",
+    "taxid": "48139",
+    "organism_name": "Psammomys obesus",
+    "genome_size": "2365774835",
+    "genome_size_ungapped": "2311828377",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCA_002406435",
+    "taxid": "99837",
+    "organism_name": "Spermophilus dauricus",
+    "genome_size": "3106271744",
+    "genome_size_ungapped": "2986950624",
+    "gc_percentage": "40"
+  },
+  {
+    "assembly_accession": "GCA_002443075",
+    "taxid": "43332",
+    "organism_name": "Elaphurus davidianus",
+    "genome_size": "2584693296",
+    "genome_size_ungapped": "2519836415",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_002754865",
+    "taxid": "9483",
+    "organism_name": "Callithrix jacchus",
+    "genome_size": "2845375248",
+    "genome_size_ungapped": "2835864148",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_002776525",
+    "taxid": "591936",
+    "organism_name": "Piliocolobus tephrosceles",
+    "genome_size": "2993041957",
+    "genome_size_ungapped": "2905229788",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_002844835",
+    "taxid": "310712",
+    "organism_name": "Dicerorhinus sumatrensis sumatrensis",
+    "genome_size": "2949847656",
+    "genome_size_ungapped": "2820082757",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_002880755",
+    "taxid": "9598",
+    "organism_name": "Pan troglodytes",
+    "genome_size": "3024031013",
+    "genome_size_ungapped": "2993159151",
+    "gc_percentage": "40.5"
+  },
+  {
+    "assembly_accession": "GCA_002880775",
+    "taxid": "9601",
+    "organism_name": "Pongo abelii",
+    "genome_size": "3065035716",
+    "genome_size_ungapped": "3043428025",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_002940915",
+    "taxid": "9430",
+    "organism_name": "Desmodus rotundus",
+    "genome_size": "2063523408",
+    "genome_size_ungapped": "2017598702",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCA_003031525",
+    "taxid": "1706337",
+    "organism_name": "Neophocaena asiaeorientalis asiaeorientalis",
+    "genome_size": "2284609912",
+    "genome_size_ungapped": "2268263097",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_004023785",
+    "taxid": "210652",
+    "organism_name": "Mungos mungo",
+    "genome_size": "2448211634",
+    "genome_size_ungapped": "2447760634",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCA_004023805",
+    "taxid": "9690",
+    "organism_name": "Panthera onca",
+    "genome_size": "2504534411",
+    "genome_size_ungapped": "2502401511",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_004023825",
+    "taxid": "494514",
+    "organism_name": "Vulpes lagopus",
+    "genome_size": "2688561625",
+    "genome_size_ungapped": "2687601225",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCA_004023845",
+    "taxid": "210647",
+    "organism_name": "Helogale parvula",
+    "genome_size": "2392471390",
+    "genome_size_ungapped": "2391389890",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCA_004023865",
+    "taxid": "9716",
+    "organism_name": "Mirounga angustirostris",
+    "genome_size": "2407319723",
+    "genome_size_ungapped": "2406371423",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_004023885",
+    "taxid": "94188",
+    "organism_name": "Cryptoprocta ferox",
+    "genome_size": "2458846334",
+    "genome_size_ungapped": "2458212834",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_004023905",
+    "taxid": "37032",
+    "organism_name": "Suricata suricatta",
+    "genome_size": "2471813441",
+    "genome_size_ungapped": "2471398141",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCA_004023925",
+    "taxid": "61379",
+    "organism_name": "Felis nigripes",
+    "genome_size": "2428424918",
+    "genome_size_ungapped": "2427077318",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCA_004023945",
+    "taxid": "95912",
+    "organism_name": "Hyaena hyaena",
+    "genome_size": "2445474026",
+    "genome_size_ungapped": "2444289126",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_004023965",
+    "taxid": "30551",
+    "organism_name": "Spilogale gracilis",
+    "genome_size": "2463318012",
+    "genome_size_ungapped": "2462135812",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_004024565",
+    "taxid": "9704",
+    "organism_name": "Zalophus californianus",
+    "genome_size": "2519860747",
+    "genome_size_ungapped": "2518833147",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_004024585",
+    "taxid": "71117",
+    "organism_name": "Paradoxurus hermaphroditus",
+    "genome_size": "2477229103",
+    "genome_size_ungapped": "2476775803",
+    "gc_percentage": "42.5"
+  },
+  {
+    "assembly_accession": "GCA_004024605",
+    "taxid": "9672",
+    "organism_name": "Pteronura brasiliensis",
+    "genome_size": "2602275310",
+    "genome_size_ungapped": "2601532210",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_004024625",
+    "taxid": "9664",
+    "organism_name": "Mellivora capensis",
+    "genome_size": "3091173380",
+    "genome_size_ungapped": "3090522280",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCA_004024645",
+    "taxid": "47180",
+    "organism_name": "Mirza coquereli",
+    "genome_size": "2340865962",
+    "genome_size_ungapped": "2339799262",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_004024665",
+    "taxid": "9447",
+    "organism_name": "Lemur catta",
+    "genome_size": "2298449872",
+    "genome_size_ungapped": "2297989972",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_004024685",
+    "taxid": "323379",
+    "organism_name": "Dipodomys stephensi",
+    "genome_size": "2346418196",
+    "genome_size_ungapped": "2345529996",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCA_004024705",
+    "taxid": "68415",
+    "organism_name": "Moschus moschiferus",
+    "genome_size": "3069608437",
+    "genome_size_ungapped": "2964378037",
+    "gc_percentage": "42.5"
+  },
+  {
+    "assembly_accession": "GCA_004024725",
+    "taxid": "9460",
+    "organism_name": "Cheirogaleus medius",
+    "genome_size": "2393092913",
+    "genome_size_ungapped": "2392340013",
+    "gc_percentage": "40.5"
+  },
+  {
+    "assembly_accession": "GCA_004024745",
+    "taxid": "51154",
+    "organism_name": "Catagonus wagneri",
+    "genome_size": "2640067814",
+    "genome_size_ungapped": "2592535414",
+    "gc_percentage": "42.5"
+  },
+  {
+    "assembly_accession": "GCA_004024765",
+    "taxid": "160400",
+    "organism_name": "Zapus hudsonius",
+    "genome_size": "2611189839",
+    "genome_size_ungapped": "2610428839",
+    "gc_percentage": "42.5"
+  },
+  {
+    "assembly_accession": "GCA_004024785",
+    "taxid": "9509",
+    "organism_name": "Ateles geoffroyi",
+    "genome_size": "2897033911",
+    "genome_size_ungapped": "2896092411",
+    "gc_percentage": "40.5"
+  },
+  {
+    "assembly_accession": "GCA_004024805",
+    "taxid": "234690",
+    "organism_name": "Xerus inauris",
+    "genome_size": "2601418404",
+    "genome_size_ungapped": "2600443904",
+    "gc_percentage": "40"
+  },
+  {
+    "assembly_accession": "GCA_004024825",
+    "taxid": "54133",
+    "organism_name": "Pygathrix nemaeus",
+    "genome_size": "3217150031",
+    "genome_size_ungapped": "3215686231",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_004024845",
+    "taxid": "2683044",
+    "organism_name": "Tonatia bakeri",
+    "genome_size": "2105886965",
+    "genome_size_ungapped": "2105600965",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCA_004024865",
+    "taxid": "9407",
+    "organism_name": "Rousettus aegyptiacus",
+    "genome_size": "1972131931",
+    "genome_size_ungapped": "1971698731",
+    "gc_percentage": "40"
+  },
+  {
+    "assembly_accession": "GCA_004024885",
+    "taxid": "9491",
+    "organism_name": "Saguinus imperator",
+    "genome_size": "3493717886",
+    "genome_size_ungapped": "3492829786",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_004024905",
+    "taxid": "9802",
+    "organism_name": "Tapirus indicus",
+    "genome_size": "2425203111",
+    "genome_size_ungapped": "2424769811",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_004024925",
+    "taxid": "71119",
+    "organism_name": "Scalopus aquaticus",
+    "genome_size": "2068871057",
+    "genome_size_ungapped": "2068147157",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCA_004024945",
+    "taxid": "182669",
+    "organism_name": "Uropsilus gracilis",
+    "genome_size": "2112710047",
+    "genome_size_ungapped": "2111885247",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_004024965",
+    "taxid": "9849",
+    "organism_name": "Tragulus javanicus",
+    "genome_size": "2589955488",
+    "genome_size_ungapped": "2582354588",
+    "gc_percentage": "42.5"
+  },
+  {
+    "assembly_accession": "GCA_004024985",
+    "taxid": "34875",
+    "organism_name": "Saiga tatarica",
+    "genome_size": "2876186568",
+    "genome_size_ungapped": "2875899868",
+    "gc_percentage": "42.5"
+  },
+  {
+    "assembly_accession": "GCA_004025005",
+    "taxid": "9438",
+    "organism_name": "Tadarida brasiliensis",
+    "genome_size": "2709928648",
+    "genome_size_ungapped": "2709504348",
+    "gc_percentage": "42.5"
+  },
+  {
+    "assembly_accession": "GCA_004025025",
+    "taxid": "9801",
+    "organism_name": "Tapirus terrestris",
+    "genome_size": "2571458752",
+    "genome_size_ungapped": "2571231452",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_004025045",
+    "taxid": "42415",
+    "organism_name": "Sigmodon hispidus",
+    "genome_size": "2730600022",
+    "genome_size_ungapped": "2729225622",
+    "gc_percentage": "40"
+  },
+  {
+    "assembly_accession": "GCA_004025065",
+    "taxid": "88029",
+    "organism_name": "Semnopithecus entellus",
+    "genome_size": "3033044217",
+    "genome_size_ungapped": "3031665617",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_004025085",
+    "taxid": "10169",
+    "organism_name": "Thryonomys swinderianus",
+    "genome_size": "2662148533",
+    "genome_size_ungapped": "2661266033",
+    "gc_percentage": "43"
+  },
+  {
+    "assembly_accession": "GCA_004025105",
+    "taxid": "48850",
+    "organism_name": "Tamandua tetradactyla",
+    "genome_size": "3849374830",
+    "genome_size_ungapped": "3848792930",
+    "gc_percentage": "39.5"
+  },
+  {
+    "assembly_accession": "GCA_004025125",
+    "taxid": "183749",
+    "organism_name": "Tolypeutes matacus",
+    "genome_size": "4115028163",
+    "genome_size_ungapped": "4113448063",
+    "gc_percentage": "39"
+  },
+  {
+    "assembly_accession": "GCA_004026225",
+    "taxid": "53275",
+    "organism_name": "Rhizomys pruinosus",
+    "genome_size": "3937265448",
+    "genome_size_ungapped": "3937169248",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_004026525",
+    "taxid": "9433",
+    "organism_name": "Miniopterus schreibersii",
+    "genome_size": "1775846775",
+    "genome_size_ungapped": "1775154975",
+    "gc_percentage": "42.5"
+  },
+  {
+    "assembly_accession": "GCA_004026545",
+    "taxid": "118852",
+    "organism_name": "Mormoops blainvillei",
+    "genome_size": "2111750309",
+    "genome_size_ungapped": "2111566809",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_004026565",
+    "taxid": "9870",
+    "organism_name": "Rangifer tarandus",
+    "genome_size": "2897299934",
+    "genome_size_ungapped": "2896823034",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCA_004026585",
+    "taxid": "94963",
+    "organism_name": "Noctilio leporinus",
+    "genome_size": "2098501394",
+    "genome_size_ungapped": "2097884294",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_004026605",
+    "taxid": "10060",
+    "organism_name": "Ondatra zibethicus",
+    "genome_size": "2562752769",
+    "genome_size_ungapped": "2562128469",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_004026625",
+    "taxid": "59474",
+    "organism_name": "Pipistrellus pipistrellus",
+    "genome_size": "2090670443",
+    "genome_size_ungapped": "2089583443",
+    "gc_percentage": "43"
+  },
+  {
+    "assembly_accession": "GCA_004026645",
+    "taxid": "43777",
+    "organism_name": "Pithecia pithecia",
+    "genome_size": "2933562501",
+    "genome_size_ungapped": "2932430901",
+    "gc_percentage": "40.5"
+  },
+  {
+    "assembly_accession": "GCA_004026665",
+    "taxid": "1453894",
+    "organism_name": "Murina feae",
+    "genome_size": "2331551382",
+    "genome_size_ungapped": "2330871882",
+    "gc_percentage": "44"
+  },
+  {
+    "assembly_accession": "GCA_004026685",
+    "taxid": "40151",
+    "organism_name": "Monodon monoceros",
+    "genome_size": "2472545502",
+    "genome_size_ungapped": "2471685502",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_004026705",
+    "taxid": "2583312",
+    "organism_name": "Nesogale talazaci",
+    "genome_size": "3236147583",
+    "genome_size_ungapped": "3235485683",
+    "gc_percentage": "43"
+  },
+  {
+    "assembly_accession": "GCA_004026725",
+    "taxid": "38674",
+    "organism_name": "Onychomys torridus",
+    "genome_size": "3202219269",
+    "genome_size_ungapped": "3201164269",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_004026745",
+    "taxid": "71006",
+    "organism_name": "Myrmecophaga tridactyla",
+    "genome_size": "3547273050",
+    "genome_size_ungapped": "3546444750",
+    "gc_percentage": "39.5"
+  },
+  {
+    "assembly_accession": "GCA_004026765",
+    "taxid": "148065",
+    "organism_name": "Micronycteris hirsuta",
+    "genome_size": "2314654405",
+    "genome_size_ungapped": "2314332605",
+    "gc_percentage": "42.5"
+  },
+  {
+    "assembly_accession": "GCA_004026785",
+    "taxid": "10047",
+    "organism_name": "Meriones unguiculatus",
+    "genome_size": "2637041433",
+    "genome_size_ungapped": "2635927533",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCA_004026805",
+    "taxid": "258930",
+    "organism_name": "Lasiurus borealis",
+    "genome_size": "2857590849",
+    "genome_size_ungapped": "2856952849",
+    "gc_percentage": "42.5"
+  },
+  {
+    "assembly_accession": "GCA_004026825",
+    "taxid": "3349691",
+    "organism_name": "Nilgiritragus hylocrius",
+    "genome_size": "2715042536",
+    "genome_size_ungapped": "2714003836",
+    "gc_percentage": "42.5"
+  },
+  {
+    "assembly_accession": "GCA_004026845",
+    "taxid": "77598",
+    "organism_name": "Heterohyrax brucei",
+    "genome_size": "3618151652",
+    "genome_size_ungapped": "3617770152",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_004026855",
+    "taxid": "48086",
+    "organism_name": "Lepus americanus",
+    "genome_size": "3123271264",
+    "genome_size_ungapped": "3122255964",
+    "gc_percentage": "44"
+  },
+  {
+    "assembly_accession": "GCA_004026885",
+    "taxid": "3371112",
+    "organism_name": "Lyroderma lyra",
+    "genome_size": "2620948449",
+    "genome_size_ungapped": "2620321849",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_004026905",
+    "taxid": "10137",
+    "organism_name": "Hystrix cristata",
+    "genome_size": "2470917678",
+    "genome_size_ungapped": "2470482578",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_004026925",
+    "taxid": "9813",
+    "organism_name": "Procavia capensis",
+    "genome_size": "3705616399",
+    "genome_size_ungapped": "3683641834",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_004026945",
+    "taxid": "37174",
+    "organism_name": "Ovis canadensis",
+    "genome_size": "2863658823",
+    "genome_size_ungapped": "2862717623",
+    "gc_percentage": "43"
+  },
+  {
+    "assembly_accession": "GCA_004026965",
+    "taxid": "10183",
+    "organism_name": "Petromus typicus",
+    "genome_size": "2389366989",
+    "genome_size_ungapped": "2388402489",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCA_004026985",
+    "taxid": "51298",
+    "organism_name": "Myotis myotis",
+    "genome_size": "2294472406",
+    "genome_size_ungapped": "2293659106",
+    "gc_percentage": "43"
+  },
+  {
+    "assembly_accession": "GCA_004027005",
+    "taxid": "39082",
+    "organism_name": "Muscardinus avellanarius",
+    "genome_size": "2527147110",
+    "genome_size_ungapped": "2525639510",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_004027025",
+    "taxid": "10157",
+    "organism_name": "Myocastor coypus",
+    "genome_size": "2903175784",
+    "genome_size_ungapped": "2901650884",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_004027065",
+    "taxid": "9833",
+    "organism_name": "Hippopotamus amphibius",
+    "genome_size": "2733493772",
+    "genome_size_ungapped": "2677440772",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_004027085",
+    "taxid": "48745",
+    "organism_name": "Mesoplodon bidens",
+    "genome_size": "2797694783",
+    "genome_size_ungapped": "2796835083",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_004027105",
+    "taxid": "43780",
+    "organism_name": "Nasalis larvatus",
+    "genome_size": "3050434315",
+    "genome_size_ungapped": "3048605415",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_004027145",
+    "taxid": "31869",
+    "organism_name": "Daubentonia madagascariensis",
+    "genome_size": "2498418007",
+    "genome_size_ungapped": "2498165307",
+    "gc_percentage": "40"
+  },
+  {
+    "assembly_accession": "GCA_004027165",
+    "taxid": "43321",
+    "organism_name": "Ctenomys sociabilis",
+    "genome_size": "2834814551",
+    "genome_size_ungapped": "2833195451",
+    "gc_percentage": "40.5"
+  },
+  {
+    "assembly_accession": "GCA_004027185",
+    "taxid": "41261",
+    "organism_name": "Glis glis",
+    "genome_size": "2462087207",
+    "genome_size_ungapped": "2461018707",
+    "gc_percentage": "42.5"
+  },
+  {
+    "assembly_accession": "GCA_004027205",
+    "taxid": "10166",
+    "organism_name": "Ctenodactylus gundi",
+    "genome_size": "2322471743",
+    "genome_size_ungapped": "2321968043",
+    "gc_percentage": "42.5"
+  },
+  {
+    "assembly_accession": "GCA_004027255",
+    "taxid": "482537",
+    "organism_name": "Galeopterus variegatus",
+    "genome_size": "3349451543",
+    "genome_size_ungapped": "3225022043",
+    "gc_percentage": "40.5"
+  },
+  {
+    "assembly_accession": "GCA_004027275",
+    "taxid": "13515",
+    "organism_name": "Eulemur fulvus",
+    "genome_size": "2748885701",
+    "genome_size_ungapped": "2748515101",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_004027295",
+    "taxid": "29091",
+    "organism_name": "Dolichotis patagonum",
+    "genome_size": "3289614431",
+    "genome_size_ungapped": "3288992131",
+    "gc_percentage": "40"
+  },
+  {
+    "assembly_accession": "GCA_004027315",
+    "taxid": "9805",
+    "organism_name": "Diceros bicornis",
+    "genome_size": "3060207893",
+    "genome_size_ungapped": "3019981293",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_004027335",
+    "taxid": "9538",
+    "organism_name": "Erythrocebus patas",
+    "genome_size": "3490485286",
+    "genome_size_ungapped": "3489177786",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_004027355",
+    "taxid": "28737",
+    "organism_name": "Elephantulus edwardii",
+    "genome_size": "4288896762",
+    "genome_size_ungapped": "4287881062",
+    "gc_percentage": "40.5"
+  },
+  {
+    "assembly_accession": "GCA_004027375",
+    "taxid": "326083",
+    "organism_name": "Macroglossus sobrinus",
+    "genome_size": "1897644983",
+    "genome_size_ungapped": "1897439383",
+    "gc_percentage": "39.5"
+  },
+  {
+    "assembly_accession": "GCA_004027415",
+    "taxid": "58069",
+    "organism_name": "Hipposideros galeritus",
+    "genome_size": "2440750851",
+    "genome_size_ungapped": "2440114251",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_004027435",
+    "taxid": "9417",
+    "organism_name": "Artibeus jamaicensis",
+    "genome_size": "2424784351",
+    "genome_size_ungapped": "2424351951",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCA_004027455",
+    "taxid": "10149",
+    "organism_name": "Hydrochoerus hydrochaeris",
+    "genome_size": "2734590088",
+    "genome_size_ungapped": "2734015388",
+    "gc_percentage": "40"
+  },
+  {
+    "assembly_accession": "GCA_004027475",
+    "taxid": "27642",
+    "organism_name": "Anoura caudifer",
+    "genome_size": "2206589520",
+    "genome_size_ungapped": "2206125520",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCA_004027495",
+    "taxid": "59527",
+    "organism_name": "Beatragus hunteri",
+    "genome_size": "2697255800",
+    "genome_size_ungapped": "2696327100",
+    "gc_percentage": "42.5"
+  },
+  {
+    "assembly_accession": "GCA_004027515",
+    "taxid": "9891",
+    "organism_name": "Antilocapra americana",
+    "genome_size": "2955306661",
+    "genome_size_ungapped": "2899129661",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCA_004027535",
+    "taxid": "10068",
+    "organism_name": "Acomys cahirinus",
+    "genome_size": "2306070819",
+    "genome_size_ungapped": "2304023919",
+    "gc_percentage": "42.5"
+  },
+  {
+    "assembly_accession": "GCA_004027555",
+    "taxid": "208972",
+    "organism_name": "Craseonycteris thonglongyai",
+    "genome_size": "2272093077",
+    "genome_size_ungapped": "2271470677",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_004027575",
+    "taxid": "10085",
+    "organism_name": "Cricetomys gambianus",
+    "genome_size": "2397721602",
+    "genome_size_ungapped": "2396974302",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCA_004027595",
+    "taxid": "108858",
+    "organism_name": "Dinomys branickii",
+    "genome_size": "2688563719",
+    "genome_size_ungapped": "2687924519",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCA_004027615",
+    "taxid": "36227",
+    "organism_name": "Cercopithecus neglectus",
+    "genome_size": "3278860052",
+    "genome_size_ungapped": "3278106652",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_004027635",
+    "taxid": "876679",
+    "organism_name": "Crocidura indochinensis",
+    "genome_size": "3082217326",
+    "genome_size_ungapped": "3081690626",
+    "gc_percentage": "40"
+  },
+  {
+    "assembly_accession": "GCA_004027655",
+    "taxid": "51346",
+    "organism_name": "Graphiurus murinus",
+    "genome_size": "2815014629",
+    "genome_size_ungapped": "2813445529",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_004027675",
+    "taxid": "51338",
+    "organism_name": "Castor canadensis",
+    "genome_size": "2761481163",
+    "genome_size_ungapped": "2760904263",
+    "gc_percentage": "39.5"
+  },
+  {
+    "assembly_accession": "GCA_004027695",
+    "taxid": "143287",
+    "organism_name": "Cavia tschudii",
+    "genome_size": "3077352510",
+    "genome_size_ungapped": "3076220410",
+    "gc_percentage": "40"
+  },
+  {
+    "assembly_accession": "GCA_004027715",
+    "taxid": "230833",
+    "organism_name": "Plecturocebus donacophilus",
+    "genome_size": "2959764160",
+    "genome_size_ungapped": "2959025960",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_004027735",
+    "taxid": "40233",
+    "organism_name": "Carollia perspicillata",
+    "genome_size": "2689411905",
+    "genome_size_ungapped": "2689025505",
+    "gc_percentage": "42.5"
+  },
+  {
+    "assembly_accession": "GCA_004027755",
+    "taxid": "9514",
+    "organism_name": "Cebus albifrons",
+    "genome_size": "3058667321",
+    "genome_size_ungapped": "3057295021",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_004027775",
+    "taxid": "9355",
+    "organism_name": "Bradypus variegatus",
+    "genome_size": "1502475299",
+    "genome_size_ungapped": "1502429099",
+    "gc_percentage": "43"
+  },
+  {
+    "assembly_accession": "GCA_004027795",
+    "taxid": "310713",
+    "organism_name": "Ceratotherium simum cottoni",
+    "genome_size": "2666617437",
+    "genome_size_ungapped": "2665912037",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_004027815",
+    "taxid": "9470",
+    "organism_name": "Nycticebus coucang",
+    "genome_size": "3294558825",
+    "genome_size_ungapped": "3293594025",
+    "gc_percentage": "40.5"
+  },
+  {
+    "assembly_accession": "GCA_004027835",
+    "taxid": "30589",
+    "organism_name": "Alouatta palliata",
+    "genome_size": "3033617595",
+    "genome_size_ungapped": "3032004595",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_004027855",
+    "taxid": "27675",
+    "organism_name": "Choloepus didactylus",
+    "genome_size": "3390661301",
+    "genome_size_ungapped": "3390151401",
+    "gc_percentage": "40"
+  },
+  {
+    "assembly_accession": "GCA_004027875",
+    "taxid": "51342",
+    "organism_name": "Aplodontia rufa",
+    "genome_size": "3005535537",
+    "genome_size_ungapped": "3004810237",
+    "gc_percentage": "40.5"
+  },
+  {
+    "assembly_accession": "GCA_004027895",
+    "taxid": "1041416",
+    "organism_name": "Orientallactaga bullata",
+    "genome_size": "3093575781",
+    "genome_size_ungapped": "3092477081",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCA_004027915",
+    "taxid": "34842",
+    "organism_name": "Capromys pilorides",
+    "genome_size": "3023850356",
+    "genome_size_ungapped": "3023501156",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCA_004027935",
+    "taxid": "185453",
+    "organism_name": "Chrysochloris asiatica",
+    "genome_size": "4750461421",
+    "genome_size_ungapped": "4749973821",
+    "gc_percentage": "40"
+  },
+  {
+    "assembly_accession": "GCA_004027955",
+    "taxid": "340076",
+    "organism_name": "Chaetophractus vellerosus",
+    "genome_size": "5335596729",
+    "genome_size_ungapped": "5335322029",
+    "gc_percentage": "39.5"
+  },
+  {
+    "assembly_accession": "GCA_004363415",
+    "taxid": "9764",
+    "organism_name": "Eschrichtius robustus",
+    "genome_size": "2617572198",
+    "genome_size_ungapped": "2616509998",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_004363435",
+    "taxid": "48752",
+    "organism_name": "Platanista minor",
+    "genome_size": "2671072510",
+    "genome_size_ungapped": "2669902310",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_004363455",
+    "taxid": "302098",
+    "organism_name": "Eubalaena japonica",
+    "genome_size": "2693575300",
+    "genome_size_ungapped": "2692865900",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_004363475",
+    "taxid": "214514",
+    "organism_name": "Perognathus longimembris pacificus",
+    "genome_size": "2601695796",
+    "genome_size_ungapped": "2599815696",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCA_004363495",
+    "taxid": "9742",
+    "organism_name": "Phocoena phocoena",
+    "genome_size": "2701010810",
+    "genome_size_ungapped": "2700299410",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCA_004363515",
+    "taxid": "9725",
+    "organism_name": "Inia geoffrensis",
+    "genome_size": "2596281358",
+    "genome_size_ungapped": "2595774158",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCA_004363535",
+    "taxid": "34846",
+    "organism_name": "Dasyprocta punctata",
+    "genome_size": "3012098298",
+    "genome_size_ungapped": "3011452398",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_004363575",
+    "taxid": "79805",
+    "organism_name": "Solenodon paradoxus",
+    "genome_size": "2109877870",
+    "genome_size_ungapped": "2109359270",
+    "gc_percentage": "40"
+  },
+  {
+    "assembly_accession": "GCA_004363605",
+    "taxid": "34827",
+    "organism_name": "Indri indri",
+    "genome_size": "2701849413",
+    "genome_size_ungapped": "2701360913",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_004363705",
+    "taxid": "27615",
+    "organism_name": "Kogia breviceps",
+    "genome_size": "2759698159",
+    "genome_size_ungapped": "2759092859",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCA_004363935",
+    "taxid": "48723",
+    "organism_name": "Pontoporia blainvillei",
+    "genome_size": "1685099017",
+    "genome_size_ungapped": "1685034717",
+    "gc_percentage": "46.5"
+  },
+  {
+    "assembly_accession": "GCA_004364475",
+    "taxid": "9760",
+    "organism_name": "Ziphius cavirostris",
+    "genome_size": "3150417206",
+    "genome_size_ungapped": "3150094306",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCA_004365145",
+    "taxid": "9818",
+    "organism_name": "Orycteropus afer",
+    "genome_size": "4687958587",
+    "genome_size_ungapped": "4686415687",
+    "gc_percentage": "40.5"
+  },
+  {
+    "assembly_accession": "GCA_004365215",
+    "taxid": "108852",
+    "organism_name": "Cuniculus paca",
+    "genome_size": "3399583187",
+    "genome_size_ungapped": "3399277187",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_004365275",
+    "taxid": "70687",
+    "organism_name": "Tupaia tana",
+    "genome_size": "3648908809",
+    "genome_size_ungapped": "3648262209",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCA_004765945",
+    "taxid": "358128",
+    "organism_name": "Phataginus tricuspis",
+    "genome_size": "3031505349",
+    "genome_size_ungapped": "3013023289",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_007922735",
+    "taxid": "59479",
+    "organism_name": "Rhinolophus ferrumequinum",
+    "genome_size": "2183991669",
+    "genome_size_ungapped": "2183596269",
+    "gc_percentage": "40.5"
+  },
+  {
+    "assembly_accession": "GCA_007922755",
+    "taxid": "10023",
+    "organism_name": "Pedetes capensis",
+    "genome_size": "2850076812",
+    "genome_size_ungapped": "2848690112",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_007922775",
+    "taxid": "9440",
+    "organism_name": "Antrozous pallidus",
+    "genome_size": "2597469403",
+    "genome_size_ungapped": "2597146103",
+    "gc_percentage": "43.5"
+  },
+  {
+    "assembly_accession": "GCA_007922795",
+    "taxid": "27670",
+    "organism_name": "Nycticeius humeralis",
+    "genome_size": "2779565143",
+    "genome_size_ungapped": "2779131843",
+    "gc_percentage": "43.5"
+  },
+  {
+    "assembly_accession": "GCA_007922815",
+    "taxid": "9419",
+    "organism_name": "Macrotus californicus",
+    "genome_size": "2160653756",
+    "genome_size_ungapped": "2160439556",
+    "gc_percentage": "44"
+  },
+  {
+    "assembly_accession": "GCA_900006655",
+    "taxid": "9595",
+    "organism_name": "Gorilla gorilla gorilla",
+    "genome_size": "3084595669",
+    "genome_size_ungapped": "3073604357",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCA_900094665",
+    "taxid": "10089",
+    "organism_name": "Mus caroli",
+    "genome_size": "2553112587",
+    "genome_size_ungapped": "2273084013",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCA_900095145",
+    "taxid": "10093",
+    "organism_name": "Mus pahari",
+    "genome_size": "2475012951",
+    "genome_size_ungapped": "2240119878",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCA_900186095",
+    "taxid": "10029",
+    "organism_name": "Cricetulus griseus",
+    "genome_size": "2358151106",
+    "genome_size_ungapped": "2323908658",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCF_000001635",
+    "taxid": "10090",
+    "organism_name": "Mus musculus",
+    "genome_size": "2728206152",
+    "genome_size_ungapped": "2654605538",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCF_000001895",
+    "taxid": "10116",
+    "organism_name": "Rattus norvegicus",
+    "genome_size": "2870167880",
+    "genome_size_ungapped": "2729969191",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCF_000001905",
+    "taxid": "9785",
+    "organism_name": "Loxodonta africana",
+    "genome_size": "3196721236",
+    "genome_size_ungapped": "3118525743",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCF_000002285",
+    "taxid": "9615",
+    "organism_name": "Canis lupus familiaris",
+    "genome_size": "2312785471",
+    "genome_size_ungapped": "2312726632",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCF_000002305",
+    "taxid": "9796",
+    "organism_name": "Equus caballus",
+    "genome_size": "2474912402",
+    "genome_size_ungapped": "2428773513",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCF_000003025",
+    "taxid": "9823",
+    "organism_name": "Sus scrofa",
+    "genome_size": "2501895775",
+    "genome_size_ungapped": "2472031134",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCF_000003205",
+    "taxid": "9913",
+    "organism_name": "Bos taurus",
+    "genome_size": "2724980740",
+    "genome_size_ungapped": "2713032866",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCF_000003625",
+    "taxid": "9986",
+    "organism_name": "Oryctolagus cuniculus",
+    "genome_size": "2737445565",
+    "genome_size_ungapped": "2603978348",
+    "gc_percentage": "43.5"
+  },
+  {
+    "assembly_accession": "GCF_000146795",
+    "taxid": "61853",
+    "organism_name": "Nomascus leucogenys",
+    "genome_size": "2962060179",
+    "genome_size_ungapped": "2756591777",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCF_000147115",
+    "taxid": "59463",
+    "organism_name": "Myotis lucifugus",
+    "genome_size": "2034575300",
+    "genome_size_ungapped": "1966419868",
+    "gc_percentage": "42.5"
+  },
+  {
+    "assembly_accession": "GCF_000151735",
+    "taxid": "10141",
+    "organism_name": "Cavia porcellus",
+    "genome_size": "2723202840",
+    "genome_size_ungapped": "2663352932",
+    "gc_percentage": "40"
+  },
+  {
+    "assembly_accession": "GCF_000151845",
+    "taxid": "132908",
+    "organism_name": "Pteropus vampyrus",
+    "genome_size": "2198284804",
+    "genome_size_ungapped": "2017244498",
+    "gc_percentage": "40"
+  },
+  {
+    "assembly_accession": "GCF_000151885",
+    "taxid": "10020",
+    "organism_name": "Dipodomys ordii",
+    "genome_size": "2236368823",
+    "genome_size_ungapped": "2065314047",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCF_000181275",
+    "taxid": "42254",
+    "organism_name": "Sorex araneus",
+    "genome_size": "2422565846",
+    "genome_size_ungapped": "2191534486",
+    "gc_percentage": "43"
+  },
+  {
+    "assembly_accession": "GCF_000181295",
+    "taxid": "30611",
+    "organism_name": "Otolemur garnettii",
+    "genome_size": "2519724550",
+    "genome_size_ungapped": "2359530453",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCF_000208655",
+    "taxid": "9361",
+    "organism_name": "Dasypus novemcinctus",
+    "genome_size": "3631306433",
+    "genome_size_ungapped": "3299677815",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCF_000235385",
+    "taxid": "39432",
+    "organism_name": "Saimiri boliviensis boliviensis",
+    "genome_size": "2608572064",
+    "genome_size_ungapped": "2477131095",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCF_000236235",
+    "taxid": "43179",
+    "organism_name": "Ictidomys tridecemlineatus",
+    "genome_size": "2478393770",
+    "genome_size_ungapped": "2311060300",
+    "gc_percentage": "40"
+  },
+  {
+    "assembly_accession": "GCF_000239315",
+    "taxid": "9669",
+    "organism_name": "Mustela putorius furo",
+    "genome_size": "2400181698",
+    "genome_size_ungapped": "2325201281",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCF_000243295",
+    "taxid": "127582",
+    "organism_name": "Trichechus manatus latirostris",
+    "genome_size": "3103791524",
+    "genome_size_ungapped": "2769082795",
+    "gc_percentage": "40.5"
+  },
+  {
+    "assembly_accession": "GCF_000247695",
+    "taxid": "10181",
+    "organism_name": "Heterocephalus glaber",
+    "genome_size": "2618188253",
+    "genome_size_ungapped": "2314754717",
+    "gc_percentage": "40"
+  },
+  {
+    "assembly_accession": "GCF_000258655",
+    "taxid": "9597",
+    "organism_name": "Pan paniscus",
+    "genome_size": "3286627333",
+    "genome_size_ungapped": "2725920599",
+    "gc_percentage": "40.5"
+  },
+  {
+    "assembly_accession": "GCF_000260255",
+    "taxid": "10160",
+    "organism_name": "Octodon degus",
+    "genome_size": "2995872505",
+    "genome_size_ungapped": "2526244269",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCF_000260355",
+    "taxid": "143302",
+    "organism_name": "Condylura cristata",
+    "genome_size": "1769662895",
+    "genome_size_ungapped": "1682547005",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCF_000276665",
+    "taxid": "34839",
+    "organism_name": "Chinchilla lanigera",
+    "genome_size": "2390852391",
+    "genome_size_ungapped": "2284276400",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCF_000280705",
+    "taxid": "51337",
+    "organism_name": "Jaculus jaculus",
+    "genome_size": "2835233679",
+    "genome_size_ungapped": "2470250781",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCF_000283155",
+    "taxid": "73337",
+    "organism_name": "Ceratotherium simum simum",
+    "genome_size": "2464350348",
+    "genome_size_ungapped": "2366841180",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCF_000292845",
+    "taxid": "9978",
+    "organism_name": "Ochotona princeps",
+    "genome_size": "2229824103",
+    "genome_size_ungapped": "1943976257",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCF_000296755",
+    "taxid": "9365",
+    "organism_name": "Erinaceus europaeus",
+    "genome_size": "2715703478",
+    "genome_size_ungapped": "2333056088",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCF_000298355",
+    "taxid": "72004",
+    "organism_name": "Bos mutus",
+    "genome_size": "2645145588",
+    "genome_size_ungapped": "2524990950",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCF_000298735",
+    "taxid": "9940",
+    "organism_name": "Ovis aries",
+    "genome_size": "2615499683",
+    "genome_size_ungapped": "2587499057",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCF_000308155",
+    "taxid": "29078",
+    "organism_name": "Eptesicus fuscus",
+    "genome_size": "2026629342",
+    "genome_size_ungapped": "1811380956",
+    "gc_percentage": "43"
+  },
+  {
+    "assembly_accession": "GCF_000311805",
+    "taxid": "419612",
+    "organism_name": "Camelus ferus",
+    "genome_size": "2009177929",
+    "genome_size_ungapped": "1985426126",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCF_000313985",
+    "taxid": "9371",
+    "organism_name": "Echinops telfairi",
+    "genome_size": "2947103070",
+    "genome_size_ungapped": "2605179602",
+    "gc_percentage": "43"
+  },
+  {
+    "assembly_accession": "GCF_000317375",
+    "taxid": "79684",
+    "organism_name": "Microtus ochrogaster",
+    "genome_size": "2287340943",
+    "genome_size_ungapped": "2104321675",
+    "gc_percentage": "42.5"
+  },
+  {
+    "assembly_accession": "GCF_000321225",
+    "taxid": "9708",
+    "organism_name": "Odobenus rosmarus divergens",
+    "genome_size": "2400133628",
+    "genome_size_ungapped": "2300235512",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCF_000325575",
+    "taxid": "9402",
+    "organism_name": "Pteropus alecto",
+    "genome_size": "1985958707",
+    "genome_size_ungapped": "1944625202",
+    "gc_percentage": "39.5"
+  },
+  {
+    "assembly_accession": "GCF_000327345",
+    "taxid": "225400",
+    "organism_name": "Myotis davidii",
+    "genome_size": "2059799708",
+    "genome_size_ungapped": "1878461987",
+    "gc_percentage": "42.5"
+  },
+  {
+    "assembly_accession": "GCF_000331955",
+    "taxid": "9733",
+    "organism_name": "Orcinus orca",
+    "genome_size": "2372903489",
+    "genome_size_ungapped": "2249565739",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCF_000349665",
+    "taxid": "10036",
+    "organism_name": "Mesocricetus auratus",
+    "genome_size": "2504908775",
+    "genome_size_ungapped": "2076159990",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCF_000349705",
+    "taxid": "9713",
+    "organism_name": "Leptonychotes weddellii",
+    "genome_size": "3156886159",
+    "genome_size_ungapped": "2223147526",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCF_000364345",
+    "taxid": "9541",
+    "organism_name": "Macaca fascicularis",
+    "genome_size": "2946827162",
+    "genome_size_ungapped": "2803850123",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCF_000400835",
+    "taxid": "59538",
+    "organism_name": "Pantholops hodgsonii",
+    "genome_size": "2696869832",
+    "genome_size_ungapped": "2507969940",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCF_000412655",
+    "taxid": "109478",
+    "organism_name": "Myotis brandtii",
+    "genome_size": "2107242811",
+    "genome_size_ungapped": "1981769726",
+    "gc_percentage": "42.5"
+  },
+  {
+    "assembly_accession": "GCF_000442215",
+    "taxid": "118797",
+    "organism_name": "Lipotes vexillifer",
+    "genome_size": "2419479385",
+    "genome_size_ungapped": "2387341922",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCF_000464555",
+    "taxid": "74533",
+    "organism_name": "Panthera tigris altaica",
+    "genome_size": "2391065193",
+    "genome_size_ungapped": "2332832693",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCF_000471725",
+    "taxid": "89462",
+    "organism_name": "Bubalus bubalis",
+    "genome_size": "2836150610",
+    "genome_size_ungapped": "2761762569",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCF_000500345",
+    "taxid": "230844",
+    "organism_name": "Peromyscus maniculatus bairdii",
+    "genome_size": "2630541020",
+    "genome_size_ungapped": "2473536444",
+    "gc_percentage": "42.5"
+  },
+  {
+    "assembly_accession": "GCF_000622305",
+    "taxid": "1026970",
+    "organism_name": "Nannospalax galili",
+    "genome_size": "3061408210",
+    "genome_size_ungapped": "2913431996",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCF_000687225",
+    "taxid": "29073",
+    "organism_name": "Ursus maritimus",
+    "genome_size": "2301362327",
+    "genome_size_ungapped": "2263004917",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCF_000696695",
+    "taxid": "9798",
+    "organism_name": "Equus przewalskii",
+    "genome_size": "2395937679",
+    "genome_size_ungapped": "2374802230",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCF_000743615",
+    "taxid": "885580",
+    "organism_name": "Fukomys damarensis",
+    "genome_size": "2333892479",
+    "genome_size_ungapped": "2285984782",
+    "gc_percentage": "40.5"
+  },
+  {
+    "assembly_accession": "GCF_000754665",
+    "taxid": "43346",
+    "organism_name": "Bison bison bison",
+    "genome_size": "2828015366",
+    "genome_size_ungapped": "2632247378",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCF_000767585",
+    "taxid": "9838",
+    "organism_name": "Camelus dromedarius",
+    "genome_size": "2004047047",
+    "genome_size_ungapped": "1981450974",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCF_000767855",
+    "taxid": "9837",
+    "organism_name": "Camelus bactrianus",
+    "genome_size": "1992646609",
+    "genome_size_ungapped": "1978979922",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCF_000769185",
+    "taxid": "61622",
+    "organism_name": "Rhinopithecus roxellana",
+    "genome_size": "2899535590",
+    "genome_size_ungapped": "2856027587",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCF_000772875",
+    "taxid": "9544",
+    "organism_name": "Macaca mulatta",
+    "genome_size": "3236207768",
+    "genome_size_ungapped": "3142076610",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCF_000951035",
+    "taxid": "336983",
+    "organism_name": "Colobus angolensis palliatus",
+    "genome_size": "2970124662",
+    "genome_size_ungapped": "2679973137",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCF_000951045",
+    "taxid": "9568",
+    "organism_name": "Mandrillus leucophaeus",
+    "genome_size": "3061992840",
+    "genome_size_ungapped": "2721407539",
+    "gc_percentage": "40.5"
+  },
+  {
+    "assembly_accession": "GCF_000955945",
+    "taxid": "9531",
+    "organism_name": "Cercocebus atys",
+    "genome_size": "2848246356",
+    "genome_size_ungapped": "2787272854",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCF_000956065",
+    "taxid": "9545",
+    "organism_name": "Macaca nemestrina",
+    "genome_size": "2948703511",
+    "genome_size_ungapped": "2838486523",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCF_000956105",
+    "taxid": "379532",
+    "organism_name": "Propithecus coquereli",
+    "genome_size": "2798135037",
+    "genome_size_ungapped": "2083747434",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCF_001305755",
+    "taxid": "9793",
+    "organism_name": "Equus asinus",
+    "genome_size": "2391034547",
+    "genome_size_ungapped": "2357920133",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCF_001443585",
+    "taxid": "32536",
+    "organism_name": "Acinonyx jubatus",
+    "genome_size": "2372536860",
+    "genome_size_ungapped": "2330606652",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCF_001458135",
+    "taxid": "9994",
+    "organism_name": "Marmota marmota marmota",
+    "genome_size": "2506852125",
+    "genome_size_ungapped": "2409740260",
+    "gc_percentage": "40"
+  },
+  {
+    "assembly_accession": "GCF_001595765",
+    "taxid": "291302",
+    "organism_name": "Miniopterus natalensis",
+    "genome_size": "1803099001",
+    "genome_size_ungapped": "1734929088",
+    "gc_percentage": "42"
+  },
+  {
+    "assembly_accession": "GCF_001604975",
+    "taxid": "2715852",
+    "organism_name": "Cebus imitator",
+    "genome_size": "2717703182",
+    "genome_size_ungapped": "2610518382",
+    "gc_percentage": "40.5"
+  },
+  {
+    "assembly_accession": "GCF_001685135",
+    "taxid": "9974",
+    "organism_name": "Manis javanica",
+    "genome_size": "2547379330",
+    "genome_size_ungapped": "2349360106",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCF_001698545",
+    "taxid": "61621",
+    "organism_name": "Rhinopithecus bieti",
+    "genome_size": "2975774845",
+    "genome_size_ungapped": "2800616040",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCF_001704415",
+    "taxid": "9925",
+    "organism_name": "Capra hircus",
+    "genome_size": "2922600443",
+    "genome_size_ungapped": "2922562256",
+    "gc_percentage": "43"
+  },
+  {
+    "assembly_accession": "GCF_002288905",
+    "taxid": "391180",
+    "organism_name": "Enhydra lutris kenyoni",
+    "genome_size": "2455260235",
+    "genome_size_ungapped": "2425577858",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCF_002288925",
+    "taxid": "9749",
+    "organism_name": "Delphinapterus leucas",
+    "genome_size": "2362758273",
+    "genome_size_ungapped": "2326894087",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCF_003327715",
+    "taxid": "9696",
+    "organism_name": "Puma concolor",
+    "genome_size": "2432949531",
+    "genome_size_ungapped": "2318879594",
+    "gc_percentage": "41.5"
+  },
+  {
+    "assembly_accession": "GCF_009914755",
+    "taxid": "9606",
+    "organism_name": "Homo sapiens",
+    "genome_size": "3117275501",
+    "genome_size_ungapped": "3117275501",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCF_029281585",
+    "taxid": "9595",
+    "organism_name": "Gorilla gorilla gorilla",
+    "genome_size": "3545834224",
+    "genome_size_ungapped": "3543834224",
+    "gc_percentage": "40.5"
+  },
+  {
+    "assembly_accession": "GCF_029289425",
+    "taxid": "9597",
+    "organism_name": "Pan paniscus",
+    "genome_size": "3244888708",
+    "genome_size_ungapped": "3239853708",
+    "gc_percentage": "40.5"
+  },
+  {
+    "assembly_accession": "GCF_028858775",
+    "taxid": "9598",
+    "organism_name": "Pan troglodytes",
+    "genome_size": "3177739762",
+    "genome_size_ungapped": "3172739762",
+    "gc_percentage": "40.5"
+  },
+  {
+    "assembly_accession": "GCF_028885655",
+    "taxid": "9601",
+    "organism_name": "Pongo abelii",
+    "genome_size": "3259853530",
+    "genome_size_ungapped": "3251792274",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCF_028885625",
+    "taxid": "9600",
+    "organism_name": "Pongo pygmaeus",
+    "genome_size": "3220935163",
+    "genome_size_ungapped": "3212935163",
+    "gc_percentage": "41"
+  },
+  {
+    "assembly_accession": "GCF_028878055",
+    "taxid": "9590",
+    "organism_name": "Symphalangus syndactylus",
+    "genome_size": "3262887708",
+    "genome_size_ungapped": "3261887708",
+    "gc_percentage": "40.5"
+  },
+  {
+    "assembly_accession": "GCF_000181335",
+    "taxid": "9685",
+    "organism_name": "Felis catus",
+    "genome_size": "2455524127",
+    "genome_size_ungapped": "2364279198",
+    "gc_percentage": "41.5"
+  }
+]

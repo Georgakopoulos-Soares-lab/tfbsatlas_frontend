@@ -1,0 +1,45 @@
+/* Footer Container */
+.footer {
+  background-color: #ffffff; /* Light background to match Navbar */
+  border-top: 2px solid #4a6fa5; /* Blue border at the top for consistency */
+  padding: 20px 10px; /* Spacing inside the footer */
+  text-align: center;
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow above footer */
+}
+
+/* Footer Text */
+.footer-text {
+  color: #4a6fa5; /* Neutral dark gray text for readability */
+  font-size: 0.95rem; /* Slightly smaller than the Navbar links */
+  margin: 0; /* No extra margin */
+}
+
+/* Footer Links */
+.footer-link {
+  color: #4a6fa5; /* Matching blue for links */
+  font-weight: 500;
+  text-decoration: none; /* Remove underline */
+  transition: color 0.3s ease, transform 0.3s ease; /* Smooth hover effects */
+}
+
+.footer-link:hover {
+  color: #0056b3; /* Darker blue on hover */
+  transform: scale(1.1); /* Slight zoom effect */
+}
+
+/* Separator Styling */
+.separator {
+  margin: 0 8px; /* Space around separator */
+  color: #adb5bd; /* Light gray for subtle separation */
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .footer-text {
+      font-size: 0.85rem; /* Slightly smaller text on mobile */
+  }
+
+  .footer {
+      padding: 15px 5px; /* Adjust padding for smaller screens */
+  }
+}
