@@ -51,13 +51,13 @@ const Home = () => {
           <TaxonomyTreemap />
         </div>
         {/* Add the image below the Statistics component */}
-        <div className="circos-image-container">
+        {/* <div className="circos-image-container">
           <img
             src={circosImage}
             alt="Circos plot illustrating transcription factor binding sites"
             className="circos-image"
           />
-        </div>
+        </div> */}
 
         {showScrollIndicator && (
           <div className="scroll-indicator" onClick={scrollToMainContent}>
