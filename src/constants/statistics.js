@@ -1,8 +1,8 @@
 export const data_statistics = {
-    total_species: 246 + 6,
+    total_species: 253,
     total_species_families: 109,
     total_species_orders: 18,
-    total_motifs: 746,
+    total_motifs: 586,
     total_motif_families: 86,
     binding_sites: 47446313
 }

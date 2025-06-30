@@ -239,7 +239,11 @@ const DataTable = () => {
         page,
         per_page: perPage,
         taxonomy_column:
-        taxonomyColumn === 'species' ? 'organism_name' : taxonomyColumn === 'order' ? 'order_taxon' : taxonomyColumn,
+          taxonomyColumn === 'species'
+            ? 'organism_name'
+            : taxonomyColumn === 'order'
+              ? 'order_taxon'
+              : taxonomyColumn,
         taxonomy_value: taxonomyValue?.trim(),
         species_name: speciesName?.trim() || undefined,
         motif_id: motifId?.toString()?.trim() || undefined,
@@ -763,7 +767,7 @@ const DataTable = () => {
 
       <div className="mb-4">
         <button
-          className="btn btn-outline-secondary dropdown-toggle w-100"
+          className="btn btn-primary dropdown-toggle w-100"
           type="button"
           onClick={() => setIsColumnsDropdownOpen(!isColumnsDropdownOpen)}
           aria-expanded={isColumnsDropdownOpen}

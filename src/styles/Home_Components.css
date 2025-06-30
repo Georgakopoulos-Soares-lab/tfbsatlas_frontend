@@ -1,466 +1,525 @@
 /* Full Page Background */
 .homepage {
-    background: linear-gradient(to bottom, #ffffff, #f0f2f5);
-    /* Subtle light gradient */
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 25px 170px;
-    color: #343a40;
-    margin-top: 60px;
-    /* Neutral dark gray for text */
+  background: linear-gradient(to bottom, #ffffff, #f0f2f5);
+  /* Subtle light gradient */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px 170px;
+  color: #343a40;
+  margin-top: 60px;
+  /* Neutral dark gray for text */
 }
 
 @media (max-width: 768px) {
-    .homepage {
-        padding: 25px 20px;
-    }
+  .homepage {
+    padding: 25px 20px;
+  }
 }
 
 /* Header Section */
 .header-section {
-    text-align: center;
-    margin-bottom: 50px;
+  text-align: center;
+  margin-bottom: 50px;
 }
 
 /* Fancy Title Animation */
 .fancy-title {
-    font-weight: 700;
-    background: linear-gradient(45deg, #0056b3, #6c757d);
-    /* Blue to dark gray gradient */
-    -webkit-background-clip: text;
-    color: transparent;
-    margin-bottom: 15px;
-    animation: fadeIn 1s ease-in-out;
-    font-size: 2.5rem;
-    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
-    /* Subtle shadow for depth */
+  font-weight: 700;
+  background: linear-gradient(45deg, #0056b3, #6c757d);
+  /* Blue to dark gray gradient */
+  -webkit-background-clip: text;
+  color: transparent;
+  margin-bottom: 15px;
+  animation: fadeIn 1s ease-in-out;
+  font-size: 2.5rem;
+  text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow for depth */
 }
 
 .fancy-title-medium {
-    font-weight: 500;
-    background: linear-gradient(45deg, #0056b3, #6c757d);
-    /* Blue to dark gray gradient */
-    -webkit-background-clip: text;
-    color: transparent;
-    margin-bottom: 15px;
-    animation: fadeIn 1s ease-in-out;
-    font-size: 2rem;
-    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
-    /* Subtle shadow for depth */
+  font-weight: 500;
+  background: linear-gradient(45deg, #0056b3, #6c757d);
+  /* Blue to dark gray gradient */
+  -webkit-background-clip: text;
+  color: transparent;
+  margin-bottom: 15px;
+  animation: fadeIn 1s ease-in-out;
+  font-size: 2rem;
+  text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow for depth */
 }
 
 .lead {
-    font-size: 1.2rem;
-    color: #6c757d;
-    /* Muted gray for supporting text */
-    text-shadow: none;
-    /* No shadow for a clean light theme */
+  font-size: 1.2rem;
+  color: #6c757d;
+  /* Muted gray for supporting text */
+  text-shadow: none;
+  /* No shadow for a clean light theme */
 }
 
 /* Main Content Section */
 .main-content {
-    width: 100%;
-    max-width: 2200px;
-    background: rgba(255, 255, 255, 0.95);
-    /* Semi-transparent white */
-    border-radius: 20px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    /* Light shadow for depth */
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    /* Space between categories */
-    color: #343a40;
-    /* Neutral dark gray for text */
+  width: 100%;
+  max-width: 2200px;
+  background: rgba(255, 255, 255, 0.95);
+  /* Semi-transparent white */
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  /* Light shadow for depth */
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  /* Space between categories */
+  color: #343a40;
+  /* Neutral dark gray for text */
 }
 
 /* Categories Container */
 .categories-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    /* Space between category components */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  /* Space between category components */
 }
 
 /* Card Styling */
 .card {
-    border-radius: 12px !important;
-    /* Slightly rounded corners */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background: #e9ecef;
-    /* Light gray background for subtle contrast */
-    color: #0056b3;
-    /* Dark blue for text */
-    text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
-    /* Soft text shadow for clarity */
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-weight: bold;
-    background-size: contain !important;
-    /* Ensure the image fits the card */
-    background-position: center;
-    background-repeat: no-repeat;
-    overflow: hidden;
+  border-radius: 12px !important;
+  /* Slightly rounded corners */
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  background: #e9ecef;
+  /* Light gray background for subtle contrast */
+  color: #0056b3;
+  /* Dark blue for text */
+  text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
+  /* Soft text shadow for clarity */
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: bold;
+  background-size: contain !important;
+  /* Ensure the image fits the card */
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
 }
 
 .card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    /* Slightly stronger shadow */
-    background-color: #dfe6ed;
-    /* Subtle change on hover */
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  /* Slightly stronger shadow */
+  background-color: #dfe6ed;
+  /* Subtle change on hover */
 }
 
 .card-body {
-    padding: 20px;
-    font-size: 1.2rem;
+  padding: 20px;
+  font-size: 1.2rem;
 }
 
 /* Explanation Text */
 .explanation-text {
-    font-size: 1rem;
-    color: #495057;
-    /* Darker muted gray for readability */
-    text-align: center;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-    font-style: italic;
-    max-width: 800px;
-    /* Limits width for readability */
-    margin-left: auto;
-    margin-right: auto;
+  font-size: 1rem;
+  color: #495057;
+  /* Darker muted gray for readability */
+  text-align: center;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+  max-width: 800px;
+  /* Limits width for readability */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Hint Text Under Dropdowns */
 .dropdown-hint {
-    font-size: 0.85rem;
-    color: #6c757d;
-    /* Muted gray */
-    text-align: center;
-    margin-top: 0.5rem;
-    font-style: italic;
-    margin-left: 6px;
+  font-size: 0.85rem;
+  color: #6c757d;
+  /* Muted gray */
+  text-align: center;
+  margin-top: 0.5rem;
+  font-style: italic;
+  margin-left: 6px;
 }
 
 /* Adjust Spacing for Dropdowns */
 .dropdown-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    /* Space between dropdowns and hints */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  /* Space between dropdowns and hints */
 }
 
 /* Animation for Cards */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-card {
-    animation: fadeIn 0.5s ease-in-out;
-    animation-fill-mode: both;
+  animation: fadeIn 0.5s ease-in-out;
+  animation-fill-mode: both;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .main-content {
-        padding: 20px;
-        gap: 20px;
-    }
+  .main-content {
+    padding: 20px;
+    gap: 20px;
+  }
 
-    .categories-container {
-        flex-direction: column;
-        /* Stack categories on smaller screens */
-        gap: 30px;
-    }
+  .categories-container {
+    flex-direction: column;
+    /* Stack categories on smaller screens */
+    gap: 30px;
+  }
 
-    .fancy-title {
-        font-size: 2rem;
-    }
+  .fancy-title {
+    font-size: 2rem;
+  }
 
-    .lead {
-        font-size: 1rem;
-    }
+  .lead {
+    font-size: 1rem;
+  }
 
-    .explanation-text {
-        font-size: 0.9rem;
-    }
+  .explanation-text {
+    font-size: 0.9rem;
+  }
 
-    .dropdown-hint {
-        font-size: 0.8rem;
-    }
+  .dropdown-hint {
+    font-size: 0.8rem;
+  }
 }
 
 @media (max-width: 576px) {
-    .card {
-        margin-bottom: 20px;
-        height: 150px;
-        /* Adjust for smaller screens */
-    }
+  .card {
+    margin-bottom: 20px;
+    height: 150px;
+    /* Adjust for smaller screens */
+  }
 
-    .card-title {
-        font-size: 1rem;
-    }
+  .card-title {
+    font-size: 1rem;
+  }
 }
 
-
 h1 {
-    color: #2c3e50;
-    margin-bottom: 20px;
+  color: #2c3e50;
+  margin-bottom: 20px;
 }
 
 .statistics-box {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 40px;
-    margin-top: 60px;
-    width: 100%;
-    padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+  margin-top: 60px;
+  width: 100%;
+  padding: 20px;
 }
 
 /* Adjust grid for smaller screens */
 @media (max-width: 1024px) {
-    .statistics-box {
-        grid-template-columns: repeat(3, 1fr);
-        /* 3 columns for medium screens */
-    }
+  .statistics-box {
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 columns for medium screens */
+  }
 }
 
 @media (max-width: 768px) {
-    .statistics-box {
-        grid-template-columns: repeat(2, 1fr);
-        /* 2 columns for smaller screens */
-    }
+  .statistics-box {
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 columns for smaller screens */
+  }
 }
 
 @media (max-width: 480px) {
-    .statistics-box {
-        grid-template-columns: 1fr;
-        /* 1 column for mobile screens */
-    }
+  .statistics-box {
+    grid-template-columns: 1fr;
+    /* 1 column for mobile screens */
+  }
 }
 
 .stat-card {
-    background-color: #f5f5f5;
-    padding: 20px;
-    text-align: center;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #f5f5f5;
+  padding: 20px;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .stat-card h2 {
-    color: #34495e;
-    font-size: 1.2rem;
-    margin-bottom: 10px;
+  color: #34495e;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
 }
 
 .stat-card p {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #4a6fa5;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #4a6fa5;
 }
 
 .cursor-pointer {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .charts {
-    display: flex;
-    gap: 40px;
-    justify-content: space-around;
-    width: 100%;
+  display: flex;
+  gap: 40px;
+  justify-content: space-around;
+  width: 100%;
 }
 
-
 .chart-card h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #34495e;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #34495e;
 }
 
 .chart-card canvas {
-    width: 100% !important;
-    height: auto !important;
+  width: 100% !important;
+  height: auto !important;
 }
 
 /* Scroll Indicator */
 /* Scroll Indicator */
 .scroll-indicator {
-    position: absolute;
-    bottom: 20px;
-    /* Positioned at the bottom of the header section */
-    right: 20px;
-    /* Center horizontally */
-    /* Adjust centering */
-    cursor: pointer;
-    /* Makes the arrow clickable */
-    z-index: 10;
-    /* Ensures it stays on top */
-    animation: fadeIn 13.5s infinite;
-    /* Subtle fading animation */
+  position: absolute;
+  bottom: 20px;
+  /* Positioned at the bottom of the header section */
+  right: 20px;
+  /* Center horizontally */
+  /* Adjust centering */
+  cursor: pointer;
+  /* Makes the arrow clickable */
+  z-index: 10;
+  /* Ensures it stays on top */
+  animation: fadeIn 13.5s infinite;
+  /* Subtle fading animation */
 }
 
 .scroll-indicator span {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 
 .scroll-arrow {
-    width: 30px;
-    height: 30px;
-    border-left: 5px solid #333;
-    /* Left diagonal line for arrow */
-    border-bottom: 5px solid #333;
-    /* Bottom diagonal line for arrow */
-    transform: rotate(-45deg);
-    /* Arrow points downward */
-    animation: bounce 1s infinite;
-    /* Add bouncing effect */
-    margin: 0 auto;
+  width: 30px;
+  height: 30px;
+  border-left: 5px solid #333;
+  /* Left diagonal line for arrow */
+  border-bottom: 5px solid #333;
+  /* Bottom diagonal line for arrow */
+  transform: rotate(-45deg);
+  /* Arrow points downward */
+  animation: bounce 1s infinite;
+  /* Add bouncing effect */
+  margin: 0 auto;
 }
 
-/* Bounce animation for arrow
-@keyframes bounce {
-
-    0%,
-    100% {
-        transform: rotate(45deg) translateY(0);
-    }
-
-    50% {
-        transform: rotate(45deg) translateY(8px);
-    }
-} */
-
-
 .statistics-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    /* Increased gap between items */
-    justify-content: center;
-    /* Center the items */
-    max-width: 2200px;
-    margin-top: 80px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  /* Increased gap between items */
+  justify-content: center;
+  /* Center the items */
+  max-width: 2200px;
+  margin-top: 80px;
 }
 
 .chart-card {
-    /* Default: Smaller width to allow more items in a row */
-    flex: 1 1 calc(25% - 30px);
-    /* Width for 5 items in a row */
-    max-width: calc(50% - 30px);
-    /* Maximum width for 5 items */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* Optional: Add shadow */
-    border: 1px solid #ddd;
-    /* Optional: Add border */
-    padding: 20px;
-    border-radius: 8px;
-    /* Optional: Rounded corners */
-    background-color: #fff;
-    word-wrap: break-word;
-    /* Ensure text wraps */
+  /* Default: Smaller width to allow more items in a row */
+  flex: 1 1 calc(25% - 30px);
+  /* Width for 5 items in a row */
+  max-width: calc(50% - 30px);
+  /* Maximum width for 5 items */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Optional: Add shadow */
+  border: 1px solid #ddd;
+  /* Optional: Add border */
+  padding: 20px;
+  border-radius: 8px;
+  /* Optional: Rounded corners */
+  background-color: #fff;
+  word-wrap: break-word;
+  /* Ensure text wraps */
 }
 
 /* First row: 3 items */
-.statistics-container:nth-child(1) .chart-card:nth-child(-n+3) {
-    flex: 1 1 calc(30% - 30px);
-    /* Adjust to fit 3 items */
-    max-width: calc(30% - 30px);
+.statistics-container:nth-child(1) .chart-card:nth-child(-n + 3) {
+  flex: 1 1 calc(30% - 30px);
+  /* Adjust to fit 3 items */
+  max-width: calc(30% - 30px);
 }
 
 /* Second row: 4 items */
-.statistics-container:nth-child(1) .chart-card:nth-child(n+4):nth-child(-n+7) {
-    flex: 1 1 calc(22% - 30px);
-    /* Adjust to fit 4 items */
-    max-width: calc(22% - 30px);
+.statistics-container:nth-child(1)
+  .chart-card:nth-child(n + 4):nth-child(-n + 7) {
+  flex: 1 1 calc(22% - 30px);
+  /* Adjust to fit 4 items */
+  max-width: calc(22% - 30px);
 }
 
 /* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
-    .chart-card {
-        flex: 1 1 calc(45% - 30px);
-        /* 2 items per row */
-        max-width: calc(45% - 30px);
-    }
+  .chart-card {
+    flex: 1 1 calc(45% - 30px);
+    /* 2 items per row */
+    max-width: calc(45% - 30px);
+  }
 }
 
 @media (max-width: 480px) {
-    .chart-card {
-        flex: 1 1 100%;
-        /* 1 item per row for mobile */
-        max-width: 100%;
-    }
+  .chart-card {
+    flex: 1 1 100%;
+    /* 1 item per row for mobile */
+    max-width: 100%;
+  }
 }
 
 .popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
 .popup-content {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    width: 400px;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .popup-title {
-    font-size: 1.5em;
-    margin-bottom: 10px;
+  font-size: 1.5em;
+  margin-bottom: 10px;
 }
 
 .popup-list {
-    list-style: none;
-    padding: 0;
-    max-height: 200px;
-    overflow-y: auto;
+  list-style: none;
+  padding: 0;
+  max-height: 200px;
+  overflow-y: auto;
 }
 
 .popup-item {
-    margin: 5px 0;
+  margin: 5px 0;
 }
 
 .popup-close {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .popup-close:hover {
-    background: #0056b3;
+  background: #0056b3;
 }
 
+.circos-image-container {
+  margin-top: 2.5rem; /* Adds space above the image */
+  margin-bottom: 2rem; /* Adds space below the image */
+}
+
+.circos-image {
+  max-width: 650px; /* Adjust the max size as needed */
+  width: 100%; /* Ensures it's responsive and doesn't overflow its container */
+  height: auto; /* Maintains the aspect ratio */
+}
+
+.dashboard-container {
+  width: 100%; /* Default width for single-column */
+  margin: 2rem auto; /* `my-5` equivalent */
+  transition: width 0.3s ease-in-out;
+}
+
+
+
+
+/* This class controls the two-column flex layout */
+.two-column-layout {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: flex-start; /* Align items to the top */
+}
+
+
+.dashboard-wrapper {
+    width: 100vw; /* Use the full viewport width */
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0 30px; /* Add some side padding so it doesn't touch the screen edges */
+    box-sizing: border-box; /* Ensures padding doesn't add to the width */
+  }
+  
+  /* This is the main container for the chart(s) */
+  .dashboard-content-area {
+    width: 100%;
+    margin: 2rem auto;
+    text-align: left; /* Reset text-align for chart content */
+  }
+  
+  /* This class is applied when the two-column view is active */
+  .two-column-dashboard {
+    width: 90%; /* Take up 90% of the wrapper's width */
+    margin: 0 auto; /* Center the container */
+  }
+  
+  /* This class controls the two-column flex layout */
+  .two-column-layout-flex {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: flex-start; /* Align items to the top */
+  }
+  
+  /* Defines the width of the columns */
+  .treemap-column {
+    flex: 1 1 50%;
+    min-width: 0; /* A crucial flexbox property to allow shrinking */
+  }
+  
+  .barchart-column {
+    flex: 1 1 50%;
+    min-width: 0;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px;
+  }

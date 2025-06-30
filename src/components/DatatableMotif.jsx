@@ -721,7 +721,7 @@ const DataTableMotif = () => {
 
       <div className="mb-4">
         <button
-          className="btn btn-outline-secondary dropdown-toggle w-100"
+          className="btn btn-primary dropdown-toggle w-100"
           type="button"
           onClick={() => setIsColumnsDropdownOpen(!isColumnsDropdownOpen)}
           aria-expanded={isColumnsDropdownOpen}
