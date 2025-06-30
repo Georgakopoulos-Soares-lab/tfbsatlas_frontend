@@ -1,4 +1,10 @@
-import React, { useMemo, useState, useEffect, useCallback } from 'react';
+import React, {
+  useMemo,
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+} from 'react';
 import ReactECharts from 'echarts-for-react';
 import * as echarts from 'echarts/core';
 import { TreemapChart, BarChart } from 'echarts/charts';
@@ -7,7 +13,6 @@ import {
   TooltipComponent,
   VisualMapComponent,
   GridComponent,
-  DataZoomComponent,
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 
@@ -23,7 +28,6 @@ echarts.use([
   TreemapChart,
   BarChart,
   GridComponent,
-  DataZoomComponent,
   CanvasRenderer,
   VisualMapComponent,
 ]);
@@ -100,6 +104,7 @@ const findMinMaxValues = (nodes) => {
 const TaxonomyTreemap = () => {
   // --- Memoized data for performance ---
   const fullTaxonomyData = useMemo(() => processFullChartData(), []);
+  const treemapRef = useRef(null);
   const { min, max } = useMemo(
     () => findMinMaxValues(fullTaxonomyData),
     [fullTaxonomyData]
@@ -121,16 +126,11 @@ const TaxonomyTreemap = () => {
 
   // --- Treemap click handler (Handles both node and breadcrumb clicks) ---
   const onTreemapClick = useCallback((params) => {
-    // ECharts `treePathInfo` includes an invisible root node. We need to account for it.
-    // A click on "Rodentia" (order) gives a path of length 2: [root, Rodentia].
-    // A click on its breadcrumb also fires this event with the same path info.
     if (
       !params.name ||
       !params.treePathInfo ||
       params.treePathInfo.length < 2
     ) {
-      // This ignores clicks on the outermost "Back" breadcrumb, which would have a path length of 1.
-      // This effectively resets the view to "All Mammalia".
       setSelectedTaxonomy(null);
       return;
     }
@@ -144,21 +144,21 @@ const TaxonomyTreemap = () => {
     setSelectedTaxonomy({ name: params.name, level, path: taxonomyPath });
   }, []);
 
+  useEffect(() => {
+    if (treemapRef.current) {
+      const chart = treemapRef.current.getEchartsInstance();
+      chart.getZr().off('mousewheel');
+    }
+  }, []);
+
   // --- EFFECT 1: Process data based on the current selection ---
   useEffect(() => {
     let accessions;
-    let contextName = 'All Mammalia';
-
     if (selectedTaxonomy) {
-      contextName = selectedTaxonomy.name;
-      console.group(`[Data Processing] Selected Taxonomy: ${contextName}`);
-      console.log('Selection Details:', selectedTaxonomy);
-
       accessions = new Set();
       speciesMetadata.forEach((species) => {
         const { path, level } = selectedTaxonomy;
         let match = false;
-        // The path from echarts includes the root, so we check from path[1]
         if (level === 'order' && species.order === path[1]) match = true;
         else if (
           level === 'family' &&
@@ -186,15 +186,8 @@ const TaxonomyTreemap = () => {
           accessions.add(species.assembly_accession.split('.')[0]);
         }
       });
-      console.log(
-        `Found ${accessions.size} assembly accessions for this category.`
-      );
     } else {
-      console.group(`[Data Processing] Initial Load / Reset: ${contextName}`);
       accessions = new Set(genomeTfHitsMap.keys());
-      console.log(
-        `Found ${accessions.size} total assembly accessions in the dataset.`
-      );
     }
 
     const newAggregatedData = new Map();
@@ -213,10 +206,8 @@ const TaxonomyTreemap = () => {
         }
       }
     }
-    console.log(`Aggregated ${newAggregatedData.size} unique motifs.`);
     setAggregatedMotifData(newAggregatedData);
     setBarChartDrilldownPath([{ level: 'tf_class', name: 'All' }]);
-    console.groupEnd();
   }, [selectedTaxonomy, genomeTfHitsMap]);
 
   // --- EFFECT 2: Generate/update the bar chart visuals ---
@@ -264,7 +255,6 @@ const TaxonomyTreemap = () => {
         text: chartTitle,
         subtext: barChartDrilldownPath
           .map((p) => (p.name === 'All' ? 'TF Classes' : p.name))
-          .map((p) => p + ' (Click any bar for drilldown analysis)')
           .join(' > '),
         left: 'center',
         textStyle: { fontSize: 16 },
@@ -273,24 +263,23 @@ const TaxonomyTreemap = () => {
       tooltip: {
         trigger: 'axis',
         axisPointer: { type: 'shadow' },
-        formatter: '{b}: {c}',
+        formatter: (params) => {
+          const param = params[0];
+          const originalCount = param.value;
+          const formattedCount = Number(originalCount).toLocaleString();
+          return `${param.name}: ${formattedCount}`;
+        },
       },
       grid: { left: '3%', right: '4%', bottom: '8%', containLabel: true },
-      xAxis: { type: 'value', boundaryGap: [0, 0.01] },
+      xAxis: {
+        type: 'log',
+        name: '',
+      },
       yAxis: {
         type: 'category',
         data: categoryData,
         axisLabel: { fontSize: 10, interval: 0 },
       },
-      dataZoom: [
-        { type: 'inside', yAxisIndex: 0, filterMode: 'none' },
-        {
-          type: 'slider',
-          yAxisIndex: 0,
-          filterMode: 'none',
-          show: sortedData.length > 25,
-        },
-      ],
       series: [
         {
           name: 'Count',
@@ -330,6 +319,8 @@ const TaxonomyTreemap = () => {
     setBarChartDrilldownPath((prev) => prev.slice(0, -1));
 
   // --- ECharts option for the Treemap ---
+  // MODIFICATION: This entire object is replaced to match the old/reference code's structure,
+  // but keeps the blue color palette as requested.
   const treemapOption = {
     title: {
       text: 'Taxonomic Distribution of Transcription Factors',
@@ -343,13 +334,28 @@ const TaxonomyTreemap = () => {
       type: 'continuous',
       min,
       max,
-      inRange: { color: ['#4A90E2', '#50E3C2', '#F5A623', '#D0021B'] },
+      inRange: {
+        // Keeping the user-specified color palette
+        color: [
+          '#3E9AE6',
+          '#337FBD',
+          '#2D71A8',
+          '#286394',
+          '#225680',
+          '#1D486B',
+          '#173A57',
+          '#122D42',
+          '#0E2233',
+          '#091620',
+        ],
+      },
       show: false,
     },
     series: [
       {
         type: 'treemap',
         data: fullTaxonomyData,
+        // Reverting to the exact properties from the reference code
         nodeClick: 'zoomToNode',
         label: { show: true, formatter: '{b}' },
         upperLabel: {
@@ -359,7 +365,7 @@ const TaxonomyTreemap = () => {
           textShadow: '1px 1px 2px #000',
         },
         itemStyle: { borderColor: '#fff' },
-        leafDepth: 1,
+        leafDepth: 1, // Reverting to the exact properties from the reference code
       },
     ],
   };
@@ -384,6 +390,7 @@ const TaxonomyTreemap = () => {
     >
       <div style={{ flex: '1 1 50%', minWidth: 0 }}>
         <ReactECharts
+          ref={treemapRef}
           echarts={echarts}
           option={treemapOption}
           style={{ height: '800px', width: '100%' }}

@@ -79,8 +79,15 @@ const Statistics = () => {
             openPopup('Mammalian Species', species_categories?.species)
           }
         >
-          <h2>Total mammalian Species</h2>
+          <h2>Total mammalian assemblies</h2>
           <p>{data_statistics.total_species}</p>
+        </div>
+        <div
+          className="stat-card cursor-pointer"
+          onClick={() => openPopup('Species Orders', species_categories?.order)}
+        >
+          <h2>Total Orders</h2>
+          <p>{data_statistics.total_species_orders}</p>
         </div>
         <div
           className="stat-card cursor-pointer"
@@ -91,14 +98,21 @@ const Statistics = () => {
         </div>
         <div
           className="stat-card cursor-pointer"
-          onClick={() => openPopup('Species Orders', species_categories?.order)}
+          onClick={() => openPopup('Species Genera', species_categories?.genus)}
         >
-          <h2>Total Orders</h2>
-          <p>{data_statistics.total_species_orders}</p>
-        </div>
+          <h2>Total Genera</h2>
+          <p>{data_statistics.total_species_genera}</p>
+        </div>  
         <div className="stat-card">
           <h2>Total Motifs Analyzed</h2>
           <p>{data_statistics.total_motifs}</p>
+        </div>
+        <div
+          className="stat-card cursor-pointer"
+          onClick={() => openPopup('Motif Classes', motif_categories?.class)}
+        >
+          <h2>Total Motif Classes</h2>
+          <p>{data_statistics.total_motif_classes}</p>
         </div>
         <div
           className="stat-card cursor-pointer"
