@@ -16,8 +16,7 @@ import {
   motif_categories,
   motif_family_initial,
 } from '../constants/categories';
-// import CommonTranscriptionFactors from './CommonTranscriptionFactors';
-// import PieChartWithDrilldown from './MotifPie';
+
 
 ChartJS.register(
   Title,

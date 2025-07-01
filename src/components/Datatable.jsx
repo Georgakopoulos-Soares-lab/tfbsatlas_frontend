@@ -123,10 +123,7 @@ const DataTable = () => {
             setSpeciesName(speciesInfo.organism_name);
             setGenus(speciesInfo.genus);
             setFamily(speciesInfo.family);
-            // --- MODIFICATION START ---
-            // Use 'order' field from the new schema
             setOrder(speciesInfo.order);
-            // --- MODIFICATION END ---
           }
           break;
         case 'genus':
@@ -134,20 +131,14 @@ const DataTable = () => {
           if (speciesInfo) {
             setGenus(speciesInfo.genus);
             setFamily(speciesInfo.family);
-            // --- MODIFICATION START ---
-            // Use 'order' field from the new schema
             setOrder(speciesInfo.order);
-            // --- MODIFICATION END ---
           }
           break;
         case 'family':
           speciesInfo = species.find((s) => s.family === taxonomyValue);
           if (speciesInfo) {
             setFamily(speciesInfo.family);
-            // --- MODIFICATION START ---
-            // Use 'order' field from the new schema
             setOrder(speciesInfo.order);
-            // --- MODIFICATION END ---
           }
           break;
         case 'order':
@@ -175,8 +166,6 @@ const DataTable = () => {
     const { value } = e.target;
     setter(value);
 
-    // --- MODIFICATION START ---
-    // Updated suggestion config to use correct keys from new JSON files
     const suggestionConfig = {
       speciesName: { data: species, key: 'organism_name' },
       genus: { data: species, key: 'genus' },
@@ -185,7 +174,6 @@ const DataTable = () => {
       motifId: { data: protein, key: 'motif_id' },
       motifAltId: { data: protein, key: 'name' },
     };
-    // --- MODIFICATION END ---
 
     const config = suggestionConfig[field];
     if (!config || !value.trim()) {
@@ -215,19 +203,14 @@ const DataTable = () => {
   };
 
   const handleActivatePageInput = () => {
-    // Don't allow editing if table is loading or has no pages
     if (loading || totalRecords === 0) return;
-    setGoToPageInput(page.toString()); // Pre-fill with the current page number
+    setGoToPageInput(page.toString());
     setIsPageInputActive(true);
   };
 
   const handleGoToPage = () => {
     const pageNumber = parseInt(goToPageInput, 10);
-
-    // Always hide the input after the action
     setIsPageInputActive(false);
-
-    // Validate the number and check if it's different from the current page
     if (
       pageNumber &&
       pageNumber >= 1 &&
@@ -236,12 +219,10 @@ const DataTable = () => {
     ) {
       setPage(pageNumber);
     }
-
-    setGoToPageInput(''); // Clear the temporary input state
+    setGoToPageInput('');
   };
 
   useEffect(() => {
-    // Focus and select the text when the input becomes active
     if (isPageInputActive && pageInputRef.current) {
       pageInputRef.current.focus();
       pageInputRef.current.select();
@@ -254,15 +235,12 @@ const DataTable = () => {
       const params = {
         page,
         per_page: perPage,
-        // --- MODIFICATION START ---
-        // Updated taxonomy_column to send 'order' instead of 'order_taxon'
         taxonomy_column:
           taxonomyColumn === 'species'
             ? 'organism_name'
             : taxonomyColumn === 'order'
               ? 'order_taxon'
               : taxonomyColumn,
-        // --- MODIFICATION END ---
         taxonomy_value: taxonomyValue?.trim(),
         species_name: speciesName?.trim() || undefined,
         motif_id: motifId?.toString()?.trim() || undefined,
@@ -332,8 +310,7 @@ const DataTable = () => {
     if ((taxonomyColumn && taxonomyValue) || species_name_query_param) {
       fetchData();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [taxonomyColumn, taxonomyValue, species_name_query_param]);
+  }, [taxonomyColumn, taxonomyValue, species_name_query_param, fetchData]);
 
   useEffect(() => {
     if (isInitialMount.current) {
@@ -341,8 +318,7 @@ const DataTable = () => {
       return;
     }
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, perPage]);
+  }, [page, perPage, fetchData]);
 
   const handleSearch = () => {
     setPage(1);
@@ -926,10 +902,38 @@ const DataTable = () => {
             ) : (
               data.map((item, index) => (
                 <tr key={index}>
+                  {/* --- MODIFICATION START --- */}
                   {columnsVisibility.species &&
-                    !['species'].includes(taxonomyColumn) && (
-                      <td>{item.species_name}</td>
-                    )}
+                    !['species'].includes(taxonomyColumn) &&
+                    (() => {
+                      // Find species metadata from the imported joined.json
+                      const speciesInfo = species.find(
+                        (s) => s.organism_name === item.species_name
+                      );
+                      // Get the assembly accession if found
+                      const assemblyAccession = speciesInfo
+                        ? speciesInfo.assembly_accession
+                        : null;
+
+                      if (assemblyAccession) {
+                        // If we have an accession, render a link
+                        return (
+                          <td>
+                            <a
+                              href={`https://www.ebi.ac.uk/ena/browser/view/${assemblyAccession}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {item.species_name}
+                            </a>
+                          </td>
+                        );
+                      } else {
+                        // If no accession found, just render the name as text
+                        return <td>{item.species_name}</td>;
+                      }
+                    })()}
+                  {/* --- MODIFICATION END --- */}
                   {columnsVisibility.genus &&
                     !['species', 'genus'].includes(taxonomyColumn) && (
                       <td>{item.genus}</td>
@@ -938,13 +942,10 @@ const DataTable = () => {
                     !['species', 'genus', 'family'].includes(
                       taxonomyColumn
                     ) && <td>{item.family}</td>}
-                  {/* --- MODIFICATION START --- */}
-                  {/* Use 'order' key to display data, matching the new schema */}
                   {columnsVisibility.order &&
                     !['species', 'genus', 'family', 'order'].includes(
                       taxonomyColumn
                     ) && <td>{item.order}</td>}
-                  {/* --- MODIFICATION END --- */}
                   {columnsVisibility.motifAltId && <td>{item.motif_alt_id}</td>}
                   {columnsVisibility.motifId && (
                     <td
@@ -979,8 +980,6 @@ const DataTable = () => {
         </table>
       </div>
 
-      {/* --- MODIFICATION START --- */}
-      {/* Updated Motif Details modal to use correct keys from the new schema */}
       {motifDetails && (
         <div className="modal-overlay" onClick={() => setMotifDetails(null)}>
           <div className="modal-container" onClick={(e) => e.stopPropagation()}>
@@ -1028,7 +1027,6 @@ const DataTable = () => {
           </div>
         </div>
       )}
-      {/* --- MODIFICATION END --- */}
 
       <div className="pagination-controls text-center mt-4 d-flex justify-content-center align-items-center">
         <button
@@ -1056,7 +1054,7 @@ const DataTable = () => {
               style={{ width: '70px', textAlign: 'center' }}
               value={goToPageInput}
               onChange={(e) => setGoToPageInput(e.target.value)}
-              onBlur={handleGoToPage} // Triggers when clicking away
+              onBlur={handleGoToPage}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') handleGoToPage();
                 if (e.key === 'Escape') setIsPageInputActive(false);
