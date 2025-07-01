@@ -1,7 +1,5 @@
 // src/pages/Visualizations.js
-
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import Select from 'react-select';
 import '../styles/Visualizations.css';
 
@@ -9,63 +7,190 @@ import '../styles/Visualizations.css';
 import MotifDensityBarChart from '../components/MotifDensityBarChart';
 import TfFamilySunburstChart from '../components/TfFamilySunburstChart';
 import TfClassDensityPlot from '../components/TfClassDensityPlot';
-import DensityHeatmapPerOrder from '../components/DensityHeatmapPerOrder'; // <-- 1. IMPORT
+import DensityHeatmapPerOrder from '../components/DensityHeatmapPerOrder';
 
-/* static species list for selectors */
+/* static data for selectors and charts */
 import joinedData from '../constants/static/joined.json';
+import tssPlotRawData from '../constants/tss_t2t_data.json'; // New data import
 
 const Visualizations = () => {
-  /* ... (all existing state and useEffect hooks for the TSS plot remain unchanged) ... */
-  const speciesOptions = joinedData.map((s) => ({
-    value: s.assembly_accession,
-    label: s.organism_name,
-  }));
+  // Options for the species selector, derived from joined.json
+  const speciesOptions = joinedData
+    .filter((s) => s.organism_name.includes('T2T'))
+    .map((s) => ({
+      value: s.assembly_accession,
+      label: s.organism_name,
+    }));
 
+  // --- START: TSS Enrichment Plot Logic ---
+
+  // State for the selected species in the dropdown
   const [tssSpeciesObject, setTssSpeciesObject] = useState(
     speciesOptions.find((o) => o.value === 'GCA_000001405') || speciesOptions[0]
   );
 
-  const [tssPlotData, setTssPlotData] = useState(null);
-  const [loadingTss, setLoadingTss] = useState(false);
+  // State to hold the generated Plotly chart configuration (data and layout)
+  const [tssChartConfig, setTssChartConfig] = useState({
+    data: [],
+    layout: {},
+  });
+  // State for handling errors, e.g., if data for a species is not available
   const [errorTss, setErrorTss] = useState(null);
 
+  // Effect hook to generate the chart configuration whenever the selected species changes
   useEffect(() => {
-    const fetchTssDensityData = async (assemblyId) => {
+    const generateTssPlot = (assemblyId) => {
+      // If no species is selected, clear the chart and any errors
       if (!assemblyId) {
-        setTssPlotData(null);
+        setTssChartConfig({ data: [], layout: {} });
+        setErrorTss(null);
         return;
       }
-      setLoadingTss(true);
-      setErrorTss(null);
 
-      try {
-        const { data } = await axios.post(
-          `${process.env.REACT_APP_API_URL}/api/density_plot`,
-          { assembly_id: assemblyId, color: 'lightgreen', lw: 1.7 },
-          { headers: { 'Content-Type': 'application/json' } }
+      // Retrieve the data for the selected assembly ID from the imported JSON
+      const aggregate_data = tssPlotRawData[assemblyId];
+
+      // If no data exists for the selected species, set an error message
+      if (!aggregate_data || aggregate_data.length === 0) {
+        setErrorTss(
+          `TSS enrichment data is not available for ${
+            tssSpeciesObject?.label || 'the selected species'
+          }.`
         );
-        if (data.plot) {
-          setTssPlotData(JSON.parse(data.plot));
-        } else {
-          throw new Error(data.error || 'Unknown error');
-        }
-      } catch (err) {
-        console.error('Error fetching TSS density plot:', err);
-        setErrorTss('Failed to fetch TSS density plot.');
-      } finally {
-        setLoadingTss(false);
+        setTssChartConfig({ data: [], layout: {} }); // Clear the chart config
+        return;
       }
+
+      setErrorTss(null); // Clear any previous errors if data is found
+
+      const z_score = 1.96; // for 95% confidence interval
+
+      // Prepare data arrays for Plotly traces
+      const x_values = aggregate_data.map((d) => d.relative_pos);
+      const enrichment_values = aggregate_data.map((d) => d.enrichment);
+
+      // 1. Main enrichment line trace
+      const enrichmentTrace = {
+        x: x_values,
+        y: enrichment_values,
+        mode: 'lines',
+        line: { color: '#222F39', width: 3 },
+        opacity: 1,
+        name: 'Enrichment',
+        customdata: aggregate_data.map((d) => [
+          d.mean_count,
+          d.total_count,
+          d.n_windows,
+          d.enrichment_sem * z_score,
+        ]),
+        hovertemplate:
+          '<b>%{x} bp from TSS</b><br>' +
+          '<b>Enrichment:</b> <b>%{y:.2f}x</b><br>' +
+          '<b>Motifs/bin:</b> %{customdata[0]:.1f}<br>' +
+          '<b>Total motifs:</b> %{customdata[1]:,.0f}<br>' +
+          '<b>95% CI:</b> ±%{customdata[3]:.3f}<br>' +
+          '<extra></extra>',
+      };
+
+      // 2. Upper bound of the confidence interval (invisible line)
+      const ciUpperTrace = {
+        x: x_values,
+        y: aggregate_data.map((d) => d.enrichment_ci_upper),
+        mode: 'lines',
+        line: { width: 0 },
+        showlegend: false,
+        hoverinfo: 'skip',
+      };
+
+      // 3. Lower bound of the confidence interval (invisible line, provides fill)
+      const ciLowerTrace = {
+        x: x_values,
+        y: aggregate_data.map((d) => d.enrichment_ci_lower),
+        mode: 'lines',
+        line: { width: 0 },
+        fill: 'tonexty', // Fills the area to the previous trace (ciUpperTrace)
+        fillcolor: 'rgba(34, 47, 57, 0.2)',
+        showlegend: false,
+        hoverinfo: 'skip',
+      };
+
+      // Define the layout for the plot
+      const layout = {
+        xaxis: {
+          title: { text: 'Distance from TSS (bp)', font: { size: 14 } },
+          range: [-1000, 1000],
+          showgrid: true,
+          gridcolor: 'rgba(128, 128, 128, 0.3)',
+          showline: true,
+          linecolor: 'black',
+          fixedrange: true,
+        },
+        yaxis: {
+          title: { text: 'Enrichment', font: { size: 14 } },
+          showgrid: true,
+          gridcolor: 'rgba(128, 128, 128, 0.3)',
+          showline: true,
+          linecolor: 'black',
+          fixedrange: true,
+        },
+        shapes: [
+          // Vertical line at x=0
+          {
+            type: 'line',
+            x0: 0,
+            x1: 0,
+            y0: 0,
+            y1: 1,
+            yref: 'paper',
+            line: { color: '#4C95D3', dash: 'dash', width: 1.5 },
+            opacity: 1,
+          },
+          // Horizontal line at y=1 (baseline enrichment)
+          {
+            type: 'line',
+            x0: -1000,
+            x1: 1000,
+            y0: 1,
+            y1: 1,
+            line: { color: '#4C95D3', dash: 'dash', width: 1.5 },
+            opacity: 1,
+          },
+        ],
+        plot_bgcolor: 'transparent',
+        paper_bgcolor: 'transparent',
+        showlegend: false,
+        margin: { l: 60, r: 20, t: 20, b: 60 },
+        hovermode: 'closest',
+        dragmode: 'zoom',
+      };
+
+      // Update the state with the complete chart configuration
+      setTssChartConfig({
+        data: [enrichmentTrace, ciUpperTrace, ciLowerTrace],
+        layout,
+      });
     };
 
-    fetchTssDensityData(tssSpeciesObject?.value);
-  }, [tssSpeciesObject]);
+    generateTssPlot(tssSpeciesObject?.value);
+  }, [tssSpeciesObject]); // Re-run this effect when the selected species changes
 
+  // Effect hook to render or update the Plotly chart in the DOM
   useEffect(() => {
-    if (tssPlotData && window.Plotly) {
-      const el = document.getElementById('plotly-tss-container');
-      if (el) window.Plotly.react(el, tssPlotData.data, tssPlotData.layout);
+    const el = document.getElementById('plotly-tss-container');
+    if (el && window.Plotly) {
+      if (tssChartConfig.data.length > 0) {
+        // If there's a valid config, render the plot
+        window.Plotly.react(el, tssChartConfig.data, tssChartConfig.layout, {
+          responsive: true,
+        });
+      } else {
+        // If the config is empty (due to error or no selection), clear the div
+        window.Plotly.purge(el);
+      }
     }
-  }, [tssPlotData]);
+  }, [tssChartConfig]); // Re-run this effect when the chart configuration changes
+
+  // --- END: TSS Enrichment Plot Logic ---
 
   return (
     <div className="visualizations-page-container">
@@ -96,18 +221,17 @@ const Visualizations = () => {
           </div>
 
           <div className="column-right">
-            {/* <-- 2. REPLACE PLACEHOLDER --> */}
             <DensityHeatmapPerOrder />
           </div>
         </div>
 
-        {/* ------------------ TSS Density Plot (with its own selector) ------------ */}
+        {/* ------------------ TSS Enrichment Plot (with its own selector) ------------ */}
         <div className="two-column-layout" style={{ marginTop: '2rem' }}>
           <div className="column-left" style={{ flex: '1 1 100%' }}>
-            <h3 className="chart-title">TSS Density Plot</h3>
+            <h3 className="chart-title">TSS Enrichment Plot</h3>
             <p className="chart-description">
-              Transcriptional activity near transcription-start sites for the
-              selected species.
+              Motif enrichment relative to transcription start sites (TSS) for
+              the selected species.
             </p>
 
             <div
@@ -127,12 +251,13 @@ const Visualizations = () => {
               />
             </div>
 
-            {loadingTss && <p className="loading">Loading TSS plot…</p>}
+            {/* Display error message if data is not available */}
             {errorTss && <p className="error">{errorTss}</p>}
 
+            {/* Container for the Plotly chart */}
             <div
               id="plotly-tss-container"
-              style={{ width: '100%', minHeight: '700px' }}
+              style={{ width: '100%', minHeight: '600px' }}
             />
           </div>
         </div>
