@@ -5,12 +5,17 @@ import React, {
   forwardRef,
   useEffect,
 } from 'react';
-import { useTable, useSortBy, usePagination, useRowSelect } from 'react-table';
+import {
+  useTable,
+  useSortBy,
+  usePagination,
+  useRowSelect,
+  useGlobalFilter,
+} from 'react-table';
+// The 'match-sorter' import is no longer needed and has been removed.
 import {
   Container,
   Button,
-  ToggleButtonGroup,
-  ToggleButton,
   Table,
   Form,
   Row,
@@ -21,12 +26,14 @@ import {
   Spinner,
 } from 'react-bootstrap';
 
+// --- Static Data Imports ---
 import joinedData from '../constants/static/joined.json';
 import motifMetadata from '../constants/static/motif_metadata.json';
+import emptyMotifs from '../constants/static/empty_motifs.json';
 import '../styles/Downloads.css';
 
 // -----------------------------------------------------------------------------
-// Zenodo Repository Configuration
+// Zenodo Repository Configuration (No changes needed)
 // -----------------------------------------------------------------------------
 const ZENODO_RECORDS = {
   species: ['15757984', '15757995', '15757998'],
@@ -40,17 +47,8 @@ const ZENODO_RECORDS = {
     '15759261',
   ],
 };
-
-// -----------------------------------------------------------------------------
-// Helper — query Zenodo JSON API instead of HEAD (avoids CORS issues)
-// -----------------------------------------------------------------------------
 const recordCache = new Map();
 
-/**
- * Fetches and caches Zenodo record metadata (JSON) which includes a `files`
- * array. The Zenodo REST API *does* emit proper CORS headers, so this is safe
- * from the browser.
- */
 const getRecordMetadata = async (recordId) => {
   if (recordCache.has(recordId)) return recordCache.get(recordId);
   const res = await fetch(`https://zenodo.org/api/records/${recordId}`);
@@ -61,17 +59,12 @@ const getRecordMetadata = async (recordId) => {
   return json;
 };
 
-/**
- * Looks for the first record where `filename` exists inside the `files` list.
- * Returns the direct download URL.
- */
 const findFirstValidUrl = async (filename, recordIds) => {
   for (const recordId of recordIds) {
     try {
       const meta = await getRecordMetadata(recordId);
       const fileEntry = (meta.files || []).find((f) => f.key === filename);
       if (fileEntry) {
-        // Prefer the API-provided download link (has auth token params etc.)
         return (
           fileEntry.links.self ||
           fileEntry.links.download ||
@@ -79,14 +72,14 @@ const findFirstValidUrl = async (filename, recordIds) => {
         );
       }
     } catch (_) {
-      /* ignore individual record failures */
+      /* ignore */
     }
   }
   throw new Error(`File ${filename} not found in any repository.`);
 };
 
 // -----------------------------------------------------------------------------
-// Checkbox component for row selection
+// Checkbox component for row selection (No changes needed)
 // -----------------------------------------------------------------------------
 const IndeterminateCheckbox = forwardRef(({ indeterminate, ...rest }, ref) => {
   const defaultRef = React.useRef();
@@ -109,16 +102,16 @@ const Downloads = () => {
   const [downloadProgress, setDownloadProgress] = useState(0);
   const [currentStatus, setCurrentStatus] = useState('');
   const [isDownloadComplete, setIsDownloadComplete] = useState(false);
+  const [globalFilter, setGlobalFilter] = useState('');
 
-  const handleModeChange = (val) => val && setDownloadMode(val);
+  const emptyMotifSet = useMemo(() => new Set(emptyMotifs), []);
 
-  // ---------------------------------------------------------------------------
-  // Table setup (react‑table)
-  // ---------------------------------------------------------------------------
-  const data = useMemo(
-    () => (downloadMode === 'species' ? joinedData : motifMetadata),
-    [downloadMode]
-  );
+  const data = useMemo(() => {
+    if (downloadMode === 'species') {
+      return joinedData;
+    }
+    return motifMetadata.filter((motif) => !emptyMotifSet.has(motif.motif_id));
+  }, [downloadMode, emptyMotifSet]);
 
   const columns = useMemo(() => {
     const speciesCols = [
@@ -136,6 +129,27 @@ const Downloads = () => {
     return downloadMode === 'species' ? speciesCols : motifCols;
   }, [downloadMode]);
 
+  // --- NEW: Define the "starts with" search function ---
+  const startsWithFilterFn = useMemo(() => {
+    const filter = (rows, columnIds, filterValue) => {
+      const searchTerm = String(filterValue).toLowerCase();
+
+      // Return all rows if search term is empty
+      if (!searchTerm) {
+        return rows;
+      }
+
+      // Filter rows
+      return rows.filter((row) => {
+        // Check if any value in the original row data starts with the search term
+        return Object.values(row.original).some((val) =>
+          String(val).toLowerCase().startsWith(searchTerm)
+        );
+      });
+    };
+    return filter;
+  }, []);
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -151,9 +165,17 @@ const Downloads = () => {
     previousPage,
     setPageSize,
     selectedFlatRows,
+    setGlobalFilter: setTableGlobalFilter,
     state: { pageIndex, pageSize },
   } = useTable(
-    { columns, data, initialState: { pageIndex: 0, pageSize: 10 } },
+    {
+      columns,
+      data,
+      initialState: { pageIndex: 0, pageSize: 10 },
+      // --- MODIFIED: Use the new "starts with" function for global filtering ---
+      globalFilter: startsWithFilterFn,
+    },
+    useGlobalFilter,
     useSortBy,
     usePagination,
     useRowSelect,
@@ -173,9 +195,15 @@ const Downloads = () => {
     }
   );
 
-  // ---------------------------------------------------------------------------
-  // Download queue — verify first, then open sequentially (2.5 s apart)
-  // ---------------------------------------------------------------------------
+  // Debounce the global filter (no changes needed here)
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setTableGlobalFilter(globalFilter);
+    }, 300);
+    return () => clearTimeout(timeout);
+  }, [globalFilter, setTableGlobalFilter]);
+
+  // Download queue logic (no changes needed here)
   const handleDownload = useCallback(async () => {
     const queue = selectedFlatRows.map((r) => r.original);
     const total = queue.length;
@@ -190,7 +218,6 @@ const Downloads = () => {
     const idKey =
       downloadMode === 'species' ? 'assembly_accession' : 'motif_id';
 
-    // 1. Verify existence and collect URLs first --------------------------------
     const validUrls = [];
     for (let i = 0; i < total; i++) {
       const item = queue[i];
@@ -202,16 +229,15 @@ const Downloads = () => {
       } catch (err) {
         console.warn(err.message);
       }
-      setDownloadProgress(((i + 1) / total) * 50); // verification = 50%
+      setDownloadProgress(((i + 1) / total) * 50);
     }
 
-    // 2. Sequentially open each confirmed URL -----------------------------------
     const delayMs = 2500;
     for (let i = 0; i < validUrls.length; i++) {
       const { url, filename } = validUrls[i];
       setCurrentStatus(`Opening ${filename} (${i + 1}/${validUrls.length})…`);
       window.open(url, '_blank', 'noopener,noreferrer');
-      setDownloadProgress(50 + ((i + 1) / validUrls.length) * 50); // download phase = remaining 50%
+      setDownloadProgress(50 + ((i + 1) / validUrls.length) * 50);
       if (i < validUrls.length - 1) {
         await new Promise((res) => setTimeout(res, delayMs));
       }
@@ -228,30 +254,41 @@ const Downloads = () => {
     <Container fluid="lg" className="mt-4 mb-4">
       <div className="downloads-paper">
         <h1 className="downloads-header">Download TFBS Atlas Datasets</h1>
-        <p className="downloads-subheader">
-          Files are verified via Zenodo's JSON API (no CORS issues) before any
-          tabs open. Confirmed files open one every 2.5&nbsp;seconds.
-        </p>
+        {/* --- MODIFIED: Removed the subheader paragraph --- */}
+        <p className="downloads-subheader"></p>
 
         <Alert variant="info">
           <strong>Tip:</strong> Allow pop‑ups so your browser can open each
           download tab.
         </Alert>
 
-        <ToggleButtonGroup
-          type="radio"
-          name="modeToggle"
-          value={downloadMode}
-          onChange={handleModeChange}
-          className="mb-3"
-        >
-          <ToggleButton id="toggle-species" value="species">
-            Per Species
-          </ToggleButton>
-          <ToggleButton id="toggle-motif" value="motif">
-            Per Motif
-          </ToggleButton>
-        </ToggleButtonGroup>
+        <Row className="mb-3 align-items-center">
+          <Col md={6}>
+            {/* --- MODIFIED: Removed placeholder from search bar --- */}
+            <Form.Control
+              type="text"
+              value={globalFilter || ''}
+              onChange={(e) => setGlobalFilter(e.target.value)}
+              className="mb-2 mb-md-0"
+            />
+          </Col>
+          <Col md={6} className="d-flex justify-content-md-end">
+            <Form.Check
+              type="switch"
+              id="download-mode-switch"
+              checked={downloadMode === 'motif'}
+              onChange={(e) =>
+                setDownloadMode(e.target.checked ? 'motif' : 'species')
+              }
+              label={
+                downloadMode === 'species'
+                  ? 'Showing Per Species'
+                  : 'Showing Per Motif'
+              }
+              className="fs-5"
+            />
+          </Col>
+        </Row>
 
         {/* Data table */}
         <Table
@@ -288,7 +325,7 @@ const Downloads = () => {
           </tbody>
         </Table>
 
-        {/* Pagination */}
+        {/* Pagination Controls */}
         <Row className="justify-content-between align-items-center mt-3 flex-wrap">
           <Col xs={12} md="auto" className="mb-2 mb-md-0">
             <Pagination>
@@ -322,16 +359,21 @@ const Downloads = () => {
               size="sm"
               value={pageSize}
               onChange={(e) => setPageSize(Number(e.target.value))}
-              style={{ width: '120px' }}
+              style={{ width: '150px' }}
             >
-              {[10, 25, 50, 100].map((s) => (
+              {[10, 25, 50, 100, 200, 500, 1000].map((s) => (
                 <option key={s} value={s}>
                   Show {s} rows
                 </option>
               ))}
+              <option key="all" value={data.length}>
+                Show All
+              </option>
             </Form.Select>
           </Col>
         </Row>
+
+        {/* Download Controls */}
         <div className="download-controls mt-4">
           <div className="selection-info me-3">
             <strong>{selectedFlatRows.length}</strong> item(s) selected

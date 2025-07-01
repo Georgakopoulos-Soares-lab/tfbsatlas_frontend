@@ -1,53 +1,104 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useMemo } from 'react';
 import CustomDropdown from './shared/Dropdown';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/Home_Components.css';
-import { motif_categories } from '../constants/categories';
+
+// Import data sources from static JSON files
+import motifMetadata from '../constants/static/motif_metadata.json';
+import emptyMotifs from '../constants/static/empty_motifs.json'; // Contains empty motif IDs
+import emptyClassesFamilies from '../constants/static/empty_classes_families.json';
 
 // ----------------------------------------------
-// MotifCategories: let users explore by Family, Class, or Transcription Factor.
-// The earlier "Origin Species" option and its helper logic are removed.
+// MotifCategories: let users explore by Family, Class, or Transcription Factor.
+// Data is now dynamically sourced and filtered to exclude empty motifs, classes, and families.
 // ----------------------------------------------
 const MotifCategories = () => {
-  const [selectedCategory, setSelectedCategory] = useState('family');
-  const [items, setItems] = useState([]);
-  const [additionalItems, setAdditionalItems] = useState(
-    motif_categories['family'].slice(4)
-  );
-  const [selectedAdditionalItem, setSelectedAdditionalItem] = useState('');
-  const [loading] = useState(false);
   const navigate = useNavigate();
 
-  // Initialise with four "family" examples
+  // Process the motif metadata once, memoize, and filter the result for efficiency
+  const { categoryData } = useMemo(() => {
+    // Create Sets of empty items for efficient O(1) lookups
+    const emptyMotifSet = new Set(emptyMotifs);
+
+    // BUG FIX: Normalize the filter lists to be lowercase and trimmed.
+    // This makes the comparison robust against case or whitespace differences.
+    const emptyFamilySet = new Set(
+      emptyClassesFamilies.empty_tf_families.map((f) => f.toLowerCase().trim())
+    );
+    const emptyClassSet = new Set(
+      emptyClassesFamilies.empty_tf_classes.map((c) => c.toLowerCase().trim())
+    );
+
+    const family = new Set();
+    const tfClass = new Set();
+    const transcriptionFactor = new Set();
+
+    motifMetadata.forEach((item) => {
+      // BUG FIX: Normalize the data from motifMetadata before checking against the Set.
+      // Add family only if it exists and is NOT in the normalized empty set.
+      if (
+        item.tf_family &&
+        !emptyFamilySet.has(item.tf_family.toLowerCase().trim())
+      ) {
+        family.add(item.tf_family);
+      }
+
+      // BUG FIX: Normalize the data from motifMetadata before checking against the Set.
+      // Add class only if it exists and is NOT in the normalized empty set.
+      if (
+        item.tf_class &&
+        !emptyClassSet.has(item.tf_class.toLowerCase().trim())
+      ) {
+        tfClass.add(item.tf_class);
+      }
+
+      // Add transcription factor only if its corresponding motif ID is NOT in the empty set
+      if (item.name && !emptyMotifSet.has(item.motif_id)) {
+        transcriptionFactor.add(item.name);
+      }
+    });
+
+    return {
+      categoryData: {
+        family: [...family].sort(),
+        class: [...tfClass].sort(),
+        'transcription factor': [...transcriptionFactor].sort(),
+      },
+    };
+  }, []); // Empty dependency array ensures this runs only once
+
+  const [selectedCategory, setSelectedCategory] = useState('family');
+  const [items, setItems] = useState([]);
+  const [additionalItems, setAdditionalItems] = useState([]);
+  const [selectedAdditionalItem, setSelectedAdditionalItem] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  // Initialise with four "family" examples once categoryData is available
   useEffect(() => {
-    setItems(motif_categories['family'].slice(0, 4));
-  }, []);
+    const initialItems = categoryData['family'] || [];
+    setItems(initialItems.slice(0, 4));
+    setAdditionalItems(initialItems.slice(4));
+  }, [categoryData]);
 
-  // ----------------------------------------------
   // Handle change of the primary dropdown
-  // ----------------------------------------------
   const handleCategoryChange = (category) => {
-    const internal = category.toLowerCase(); // "family" | "class" | "transcription factor"
-    setSelectedCategory(internal);
+    const lowercasedCategory = category.toLowerCase();
+    setSelectedCategory(lowercasedCategory);
 
-    const key = internal === 'transcription factor' ? 'motif_name' : internal;
-    const raw = motif_categories[key] || [];
+    const itemsForCategory = categoryData[lowercasedCategory] || [];
 
-    const display =
-      internal === 'transcription factor' ? raw.map((t) => t.name) : raw;
-
-    setItems(display.slice(0, 4));
-    setAdditionalItems(display.slice(4));
+    setItems(itemsForCategory.slice(0, 4));
+    setAdditionalItems(itemsForCategory.slice(4));
     setSelectedAdditionalItem('');
   };
 
   // Add more chips from the "Select More" dropdown
-  const handleAdditionalItemSelect = (item) => {
+  const handleAdditionalItemSelect = useCallback((item) => {
     setItems((prev) => [...prev, item]);
     setAdditionalItems((prev) => prev.filter((i) => i !== item));
     setSelectedAdditionalItem(item);
-  };
+  }, []);
 
   // Navigate on card click
   const handleCardClick = useCallback(
@@ -85,37 +136,30 @@ const MotifCategories = () => {
           <h2 className="text-center mb-4 fancy-title-medium">
             Explore Motif Categories
           </h2>
-
           <p className="explanation-text">
             Choose a category – "Class", "Family", or pick a specific
             "Transcription Factor". Popular entries will appear below; use
             "Select More" to add more.
           </p>
-
-          {/* Primary dropdown + optional additional dropdown */}
           <div className="d-flex justify-content-center mb-4 mt-4 gap-5">
             <div className="dropdown-container">
               <CustomDropdown
                 options={['Family', 'Class', 'Transcription Factor']}
                 defaultOption="Family"
-                onOptionSelect={(opt) => handleCategoryChange(opt)}
+                onOptionSelect={handleCategoryChange}
                 showInput={false}
               />
             </div>
-
             {additionalItems.length > 0 && (
               <div className="dropdown-container">
                 <CustomDropdown
                   options={additionalItems}
                   defaultOption={selectedAdditionalItem || 'Select More'}
                   onOptionSelect={handleAdditionalItemSelect}
-                  showInput={false}
                 />
               </div>
             )}
           </div>
-
-          {/* Cards */}
           {items.length > 0 && (
             <div className="row justify-content-center mt-4">
               {items.map((item, idx) => (

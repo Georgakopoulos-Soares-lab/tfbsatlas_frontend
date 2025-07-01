@@ -5,7 +5,11 @@ import Select from 'react-select';
 // Import the static JSON data
 import genomeHits from '../constants/static/genome_tf_hit.json';
 import assemblyMetadata from '../constants/static/joined.json';
-import motifMetadata from '../constants/static/motif_metadata.json'; // Import motif data for the selector
+import motifMetadata from '../constants/static/motif_metadata.json';
+// --- MODIFICATION START ---
+// Import the list of motifs to be excluded
+import emptyMotifs from '../constants/static/empty_motifs.json';
+// --- MODIFICATION END ---
 
 /**
  * Text wrapping function for Plotly labels
@@ -27,11 +31,18 @@ function wrapTextHtml(text, maxChars = 20) {
   return lines.join('<br>');
 }
 
-// Prepare options for the motif selector once, outside the component
-const motifOptions = motifMetadata.map((motif) => ({
-  value: motif.motif_id,
-  label: `${motif.motif_id} (${motif.name})`,
-}));
+// --- MODIFICATION START ---
+// Create a Set of empty motif IDs for efficient lookup.
+const emptyMotifSet = new Set(emptyMotifs);
+
+// Prepare options for the motif selector, filtering out the empty motifs.
+const motifOptions = motifMetadata
+  .filter((motif) => !emptyMotifSet.has(motif.motif_id)) // Exclude motifs if they are in the set
+  .map((motif) => ({
+    value: motif.motif_id,
+    label: `${motif.motif_id} (${motif.name})`,
+  }));
+// --- MODIFICATION END ---
 
 const MotifDensityBarChart = () => {
   // This component now manages its own selected motif state
@@ -90,7 +101,7 @@ const MotifDensityBarChart = () => {
         `<b>${metadata.organism_name}</b><br>` +
         `Assembly: ${metadata.assembly_accession}<br>` +
         `Density: <b>${density.toFixed(3)}</b> motifs/MB<br>` +
-        `<br><b>Genome Info:</b><br>Size (ungapped): ${genomeSizeGb.toFixed(1)} GB<br>GC content: ${metadata.gc_percentage}%<br><br><b>Taxonomic lineage:</b><br>NCBI Taxon ID: ${metadata.taxid}<br>Order: ${metadata.order}<br>Family: ${metadata.family}<br>Genus: ${metadata.genus}<br>`
+        `<br><b>Genome Info:</b><br>Size (ungapped): ${genomeSizeGb.toFixed(1)} GB<br>GC content: ${metadata.gc_percentage}%<br><br><b>Taxonomic lineage:</b><br>NCBI Taxon ID: ${metadata.tax_id}<br>Order: ${metadata.order}<br>Family: ${metadata.family}<br>Genus: ${metadata.genus}<br>`
       );
     });
 
@@ -124,7 +135,6 @@ const MotifDensityBarChart = () => {
       height: 700,
       font: { family: 'Arial, sans-serif', size: 12 },
       margin: { l: 180, r: 20, t: 25, b: 50 }, // Increased left margin for longer names
-      // --- FIX: Set both plot and paper background to transparent ---
       plot_bgcolor: 'transparent',
       paper_bgcolor: 'transparent',
       dragmode: false,

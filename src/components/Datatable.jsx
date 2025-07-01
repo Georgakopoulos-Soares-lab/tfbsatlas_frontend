@@ -8,7 +8,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/Datatable.css';
 import { downloadSpeciesData } from '../utils/downloadDB';
 import { urls } from '../constants/constants.js';
-import { species, protein } from '../constants/static/static_metadata.js';
+// --- MODIFICATION START ---
+// Updated imports to use the new JSON data sources
+import species from '../constants/static/joined.json';
+import protein from '../constants/static/motif_metadata.json';
+// --- MODIFICATION END ---
 import InstructionsSection from './shared/InstructionsSection';
 import DownloadPopup from './shared/DownloadPopup';
 
@@ -119,7 +123,10 @@ const DataTable = () => {
             setSpeciesName(speciesInfo.organism_name);
             setGenus(speciesInfo.genus);
             setFamily(speciesInfo.family);
-            setOrder(speciesInfo.order_taxon);
+            // --- MODIFICATION START ---
+            // Use 'order' field from the new schema
+            setOrder(speciesInfo.order);
+            // --- MODIFICATION END ---
           }
           break;
         case 'genus':
@@ -127,14 +134,20 @@ const DataTable = () => {
           if (speciesInfo) {
             setGenus(speciesInfo.genus);
             setFamily(speciesInfo.family);
-            setOrder(speciesInfo.order_taxon);
+            // --- MODIFICATION START ---
+            // Use 'order' field from the new schema
+            setOrder(speciesInfo.order);
+            // --- MODIFICATION END ---
           }
           break;
         case 'family':
           speciesInfo = species.find((s) => s.family === taxonomyValue);
           if (speciesInfo) {
             setFamily(speciesInfo.family);
-            setOrder(speciesInfo.order_taxon);
+            // --- MODIFICATION START ---
+            // Use 'order' field from the new schema
+            setOrder(speciesInfo.order);
+            // --- MODIFICATION END ---
           }
           break;
         case 'order':
@@ -162,14 +175,17 @@ const DataTable = () => {
     const { value } = e.target;
     setter(value);
 
+    // --- MODIFICATION START ---
+    // Updated suggestion config to use correct keys from new JSON files
     const suggestionConfig = {
       speciesName: { data: species, key: 'organism_name' },
       genus: { data: species, key: 'genus' },
-      order: { data: species, key: 'order_taxon' },
+      order: { data: species, key: 'order' },
       family: { data: species, key: 'family' },
-      motifId: { data: protein, key: 'matrix_id' },
+      motifId: { data: protein, key: 'motif_id' },
       motifAltId: { data: protein, key: 'name' },
     };
+    // --- MODIFICATION END ---
 
     const config = suggestionConfig[field];
     if (!config || !value.trim()) {
@@ -238,12 +254,15 @@ const DataTable = () => {
       const params = {
         page,
         per_page: perPage,
+        // --- MODIFICATION START ---
+        // Updated taxonomy_column to send 'order' instead of 'order_taxon'
         taxonomy_column:
           taxonomyColumn === 'species'
             ? 'organism_name'
             : taxonomyColumn === 'order'
               ? 'order_taxon'
               : taxonomyColumn,
+        // --- MODIFICATION END ---
         taxonomy_value: taxonomyValue?.trim(),
         species_name: speciesName?.trim() || undefined,
         motif_id: motifId?.toString()?.trim() || undefined,
@@ -309,34 +328,24 @@ const DataTable = () => {
     species_name_query_param,
   ]);
 
-  // --- MODIFICATION START ---
-  // This effect handles the very first data load when the component mounts with specific query params.
   useEffect(() => {
     if ((taxonomyColumn && taxonomyValue) || species_name_query_param) {
       fetchData();
     }
-    // We intentionally leave the dependency array limited to the main query params.
-    // This ensures this effect only runs when the page is loaded for a specific taxonomy,
-    // not every time a filter input changes.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [taxonomyColumn, taxonomyValue, species_name_query_param]);
 
-  // This effect handles fetching data only when pagination (page or perPage) changes.
   useEffect(() => {
-    // We use the ref to skip running this effect on the initial component mount,
-    // because the effect above already handles the initial data load.
     if (isInitialMount.current) {
-      isInitialMount.current = false; // Set the flag to false after the first render.
-      return; // Don't do anything on the first render.
+      isInitialMount.current = false;
+      return;
     }
     fetchData();
-    // This effect should only re-run when page or perPage changes, not on other filter changes.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, perPage]);
-  // --- MODIFICATION END ---
 
   const handleSearch = () => {
-    setPage(1); // Reset to page 1 for a new search
+    setPage(1);
     fetchData();
   };
 
@@ -682,7 +691,6 @@ const DataTable = () => {
             </div>
           </div>
 
-          {/* MODIFICATION: Restored taxonomic filters with correct readOnly logic */}
           <div className="row mb-4">
             <div className="col position-relative">
               <label htmlFor="order"> Order </label>
@@ -930,10 +938,13 @@ const DataTable = () => {
                     !['species', 'genus', 'family'].includes(
                       taxonomyColumn
                     ) && <td>{item.family}</td>}
+                  {/* --- MODIFICATION START --- */}
+                  {/* Use 'order' key to display data, matching the new schema */}
                   {columnsVisibility.order &&
                     !['species', 'genus', 'family', 'order'].includes(
                       taxonomyColumn
-                    ) && <td>{item.order_taxon}</td>}
+                    ) && <td>{item.order}</td>}
+                  {/* --- MODIFICATION END --- */}
                   {columnsVisibility.motifAltId && <td>{item.motif_alt_id}</td>}
                   {columnsVisibility.motifId && (
                     <td
@@ -968,6 +979,8 @@ const DataTable = () => {
         </table>
       </div>
 
+      {/* --- MODIFICATION START --- */}
+      {/* Updated Motif Details modal to use correct keys from the new schema */}
       {motifDetails && (
         <div className="modal-overlay" onClick={() => setMotifDetails(null)}>
           <div className="modal-container" onClick={(e) => e.stopPropagation()}>
@@ -982,10 +995,10 @@ const DataTable = () => {
               </button>
             </div>
             <div className="modal-body">
-              {motifDetails?.matrix_id && (
+              {motifDetails?.motif_id && (
                 <div className="modal-logo">
                   <img
-                    src={`${urls?.JASPAR_LOGOS_URL}${motifDetails?.matrix_id}.svg`}
+                    src={`${urls?.JASPAR_LOGOS_URL}${motifDetails?.motif_id}.svg`}
                     alt={`${motifDetails?.name} Logo`}
                     className="modal-logo-img"
                   />
@@ -993,18 +1006,18 @@ const DataTable = () => {
               )}
               <p>
                 <strong>Transcription Factor Class: </strong>
-                {motifDetails?.class_column}
+                {motifDetails?.tf_class}
               </p>
               <p>
                 <strong>Family: </strong>
-                {motifDetails?.family}
+                {motifDetails?.tf_family}
               </p>
               <p>
                 <strong>Species: </strong>
-                {motifDetails?.species}
+                {motifDetails?.species_name}
               </p>
               <a
-                href={`${urls?.JASPAR_URL}${motifDetails?.matrix_id}`}
+                href={`${urls?.JASPAR_URL}${motifDetails?.motif_id}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="modal-link"
@@ -1015,17 +1028,18 @@ const DataTable = () => {
           </div>
         </div>
       )}
+      {/* --- MODIFICATION END --- */}
 
       <div className="pagination-controls text-center mt-4 d-flex justify-content-center align-items-center">
         <button
-          className="btn btn-outline-primary me-2"
+          className="btn btn-primary me-2"
           onClick={() => setPage(1)}
           disabled={page === 1 || loading}
         >
           First
         </button>
         <button
-          className="btn btn-outline-primary"
+          className="btn btn-primary"
           onClick={() => setPage(Math.max(page - 1, 1))}
           disabled={page === 1 || loading}
         >
@@ -1068,14 +1082,14 @@ const DataTable = () => {
         </span>
 
         <button
-          className="btn btn-outline-primary"
+          className="btn btn-primary"
           onClick={() => setPage(Math.min(page + 1, totalRecords))}
           disabled={page === totalRecords || totalRecords === 0 || loading}
         >
           Next
         </button>
         <button
-          className="btn btn-outline-primary ms-2"
+          className="btn btn-primary ms-2"
           onClick={() => setPage(totalRecords)}
           disabled={page === totalRecords || totalRecords === 0 || loading}
         >

@@ -5,7 +5,11 @@ import { InfoTooltip } from './shared/InfoTooltip';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/Datatable.css';
 import { downloadMotifData } from '../utils/downloadDB';
-import { species, protein } from '../constants/static/static_metadata.js';
+// --- MODIFICATION START ---
+// Updated imports to use the new JSON data sources
+import species from '../constants/static/joined.json';
+import protein from '../constants/static/motif_metadata.json';
+// --- MODIFICATION END ---
 import { urls } from '../constants/constants.js';
 import InstructionsSection from './shared/InstructionsSection';
 import DownloadPopup from './shared/DownloadPopup';
@@ -34,7 +38,7 @@ const DataTableMotif = () => {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(20);
-  const [totalRecords, setTotalRecords] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
   const [isColumnsDropdownOpen, setIsColumnsDropdownOpen] = useState(false);
   const [isPageInputActive, setIsPageInputActive] = useState(false);
   const [goToPageInput, setGoToPageInput] = useState('');
@@ -42,6 +46,7 @@ const DataTableMotif = () => {
   const [suggestions, setSuggestions] = useState([]);
   const [activeSuggestionBox, setActiveSuggestionBox] = useState('');
   const filtersRef = useRef(null);
+  const isInitialMount = useRef(true);
 
   // Filter states
   const [assembly, setAssembly] = useState('');
@@ -58,7 +63,6 @@ const DataTableMotif = () => {
   const [family, setFamily] = useState('');
   const [strandFilter, setStrandFilter] = useState('both');
 
-  // State for column visibility
   const [columnsVisibility, setColumnsVisibility] = useState({
     species: true,
     motifId: true,
@@ -75,9 +79,7 @@ const DataTableMotif = () => {
     family: true,
   });
 
-  // State to control visibility of filter section
   const [filtersVisible, setFiltersVisible] = useState(false);
-  // Sorting state
   const [sortConfig, setSortConfig] = useState({
     column: 'score',
     direction: 'asc',
@@ -90,9 +92,7 @@ const DataTableMotif = () => {
     'Only the current page will be downloaded. For full dataset download visit the Downloads page';
 
   const [showPopup, setShowPopup] = useState(false);
-  const handleClosePopup = () => {
-    setShowPopup(false);
-  };
+  const handleClosePopup = () => setShowPopup(false);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -106,24 +106,29 @@ const DataTableMotif = () => {
     };
   }, []);
 
-  // MODIFICATION: Auto-populate dependent fields based on the selected taxonomy
+  // --- MODIFICATION: Updated to use new schema for populating fields from URL parameters. ---
   useEffect(() => {
-    // Sync URL taxonomy params with local filter state
     if (taxonomyColumn && taxonomyValue) {
       if (taxonomyColumn === 'motif_alt_id') {
         setMotifAltId(taxonomyValue);
-        // Find the protein to auto-fill class and family
         const proteinEntry = protein.find((p) => p.name === taxonomyValue);
         if (proteinEntry) {
-          setFamily(proteinEntry.family);
-          setProtClass(proteinEntry.class);
+          setFamily(proteinEntry.tf_family);
+          setProtClass(proteinEntry.tf_class);
+        }
+      } else if (taxonomyColumn === 'motif_id') {
+        setMotifId(taxonomyValue);
+        const proteinEntry = protein.find((p) => p.motif_id === taxonomyValue);
+        if (proteinEntry) {
+          setMotifAltId(proteinEntry.name);
+          setFamily(proteinEntry.tf_family);
+          setProtClass(proteinEntry.tf_class);
         }
       } else if (taxonomyColumn === 'family') {
         setFamily(taxonomyValue);
-        // Find the protein to auto-fill class
-        const proteinEntry = protein.find((p) => p.family === taxonomyValue);
+        const proteinEntry = protein.find((p) => p.tf_family === taxonomyValue);
         if (proteinEntry) {
-          setProtClass(proteinEntry.class);
+          setProtClass(proteinEntry.tf_class);
         }
       } else if (taxonomyColumn === 'class') {
         setProtClass(taxonomyValue);
@@ -135,12 +140,17 @@ const DataTableMotif = () => {
     const { value } = e.target;
     setter(value);
 
+    // --- MODIFICATION: Updated suggestion config to use correct keys from new JSON files. ---
     const suggestionConfig = {
       motifAltId: { data: protein, key: 'name', type: 'protein' },
-      motifId: { data: protein, key: 'matrix_id', type: 'protein' },
-      family: { data: protein, key: 'family', type: 'protein' },
-      protClass: { data: protein, key: 'class', type: 'protein' },
-      assembly: { data: species, key: 'species_name', type: 'species' },
+      motifId: { data: protein, key: 'motif_id', type: 'protein' },
+      family: { data: protein, key: 'tf_family', type: 'protein' },
+      protClass: { data: protein, key: 'tf_class', type: 'protein' },
+      assembly: {
+        data: species,
+        key: 'assembly_accession',
+        type: 'species',
+      },
     };
 
     const config = suggestionConfig[field];
@@ -150,18 +160,9 @@ const DataTableMotif = () => {
       return;
     }
 
-    let sourceData = config.data;
-    if (config.type === 'protein' && taxonomyColumn && taxonomyValue) {
-      const pageContextKey = taxonomyColumn;
-      sourceData = sourceData.filter(
-        (item) =>
-          item[pageContextKey]?.toLowerCase() === taxonomyValue.toLowerCase()
-      );
-    }
-
     const { key } = config;
     const lowercasedValue = value.toLowerCase();
-    const filteredSuggestions = sourceData
+    const filteredSuggestions = config.data
       .map((item) => item[key])
       .filter(
         (itemValue) =>
@@ -191,8 +192,8 @@ const DataTableMotif = () => {
         motif_alt_id: motifAltId?.trim() || undefined,
         sequence_name: sequenceName?.trim() || undefined,
         matched_sequence: matchedSequence?.trim() || undefined,
-        start: queryStart?.toString().trim() || 1,
-        end: queryEnd?.toString().trim() || 99999999999999999,
+        start: queryStart?.toString().trim() || undefined,
+        end: queryEnd?.toString().trim() || undefined,
         strand: strandFilter === 'both' ? undefined : strandFilter,
         score_min: scoreRange.min?.toString().trim() || undefined,
         score_max: scoreRange.max?.toString().trim() || undefined,
@@ -210,21 +211,21 @@ const DataTableMotif = () => {
 
       const queryParams = new URLSearchParams(filteredParams);
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/filter_based_on_motif?${queryParams.toString()}`,
-        { timeout: 10000 }
+        `${process.env.REACT_APP_API_URL}/api/filter_based_on_motif?${queryParams.toString()}`
       );
       const result = await response.json();
-      if (result.data) {
+
+      if (result.data && result.pagination) {
         setData(result.data);
-        setTotalRecords(result.pagination.totalPages || 0);
+        setTotalPages(result.pagination.totalPages || 0);
       } else {
         setData([]);
-        setTotalRecords(0);
+        setTotalPages(0);
       }
     } catch (error) {
       console.error('Error fetching data:', error);
       setData([]);
-      setTotalRecords(0);
+      setTotalPages(0);
     }
     setLoading(false);
   }, [
@@ -247,54 +248,59 @@ const DataTableMotif = () => {
     family,
   ]);
 
+  // Effect for the initial data load based on URL parameters
   useEffect(() => {
+    if (taxonomyColumn && taxonomyValue) {
+      fetchData();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [taxonomyColumn, taxonomyValue]);
+
+  // Effect for pagination changes, skips initial mount
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [page, perPage]);
+
+  const handleSearch = () => {
+    setPage(1); // Reset to page 1 for a new search
+    fetchData(); // Manually trigger fetch
+  };
 
   useEffect(() => {
-    // Focus and select the text when the input becomes active
     if (isPageInputActive && pageInputRef.current) {
       pageInputRef.current.focus();
       pageInputRef.current.select();
     }
   }, [isPageInputActive]);
 
-  const handleSearch = () => {
-    setPage(1);
-    fetchData();
-  };
-
   const handleActivatePageInput = () => {
-    // Don't allow editing if table is loading or has no pages
-    if (loading || totalRecords === 0) return;
-    setGoToPageInput(page.toString()); // Pre-fill with the current page number
+    if (loading || totalPages === 0) return;
+    setGoToPageInput(page.toString());
     setIsPageInputActive(true);
   };
 
   const handleGoToPage = () => {
     const pageNumber = parseInt(goToPageInput, 10);
-
-    // Always hide the input after the action
     setIsPageInputActive(false);
 
-    // Validate the number and check if it's different from the current page
     if (
-      pageNumber &&
+      !isNaN(pageNumber) &&
       pageNumber >= 1 &&
-      pageNumber <= totalRecords &&
+      pageNumber <= totalPages &&
       pageNumber !== page
     ) {
       setPage(pageNumber);
     }
-
-    setGoToPageInput(''); // Clear the temporary input state
+    setGoToPageInput('');
   };
 
-  // MODIFICATION: Make clear filters "smarter" about locked taxonomy
   const handleClearFilters = () => {
     setAssembly('');
-    setMotifId('');
     setSequenceName('');
     setQueryStart('');
     setQueryEnd('');
@@ -304,16 +310,15 @@ const DataTableMotif = () => {
     setQValueRange({ min: '', max: '' });
     setMatchedSequence('');
 
-    // Conditionally clear taxonomy-related fields
-    if (taxonomyColumn !== 'motif_alt_id') {
+    if (taxonomyColumn !== 'motif_id') setMotifId('');
+    if (!['motif_alt_id', 'motif_id'].includes(taxonomyColumn))
       setMotifAltId('');
-    }
-    if (!['family', 'motif_alt_id'].includes(taxonomyColumn)) {
+    if (!['family', 'motif_alt_id', 'motif_id'].includes(taxonomyColumn))
       setFamily('');
-    }
-    if (!['class', 'family', 'motif_alt_id'].includes(taxonomyColumn)) {
+    if (
+      !['class', 'family', 'motif_alt_id', 'motif_id'].includes(taxonomyColumn)
+    )
       setProtClass('');
-    }
 
     setPage(1);
     setTimeout(fetchData, 0);
@@ -321,25 +326,6 @@ const DataTableMotif = () => {
 
   const handleColumnToggle = (column) => {
     setColumnsVisibility((prev) => ({ ...prev, [column]: !prev[column] }));
-  };
-
-  const [motifDetails, setMotifDetails] = useState(null);
-
-  // Function to fetch species details - kept for Assembly link clicks
-  const [speciesDetails, setSpeciesDetails] = useState(null);
-  const fetchSpeciesDetails = async (speciesName) => {
-    try {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/species/${speciesName}`
-      );
-      const result = await response.json();
-      setSpeciesDetails(result);
-    } catch (error) {
-      console.error('Error fetching species details:', error);
-    }
-  };
-  const handleSpeciesClick = (speciesName) => {
-    if (!taxonomyValue) fetchSpeciesDetails(speciesName);
   };
 
   const handleDownload = async (format) => {
@@ -369,7 +355,6 @@ const DataTableMotif = () => {
     return '↑';
   };
 
-  // MODIFICATION: Dynamically build the list of columns for the dropdown
   const getSelectableColumns = () => {
     const columns = [
       { label: 'Assembly', value: 'species' },
@@ -387,21 +372,24 @@ const DataTableMotif = () => {
       { label: 'Family', value: 'family' },
     ];
 
-    // Filter out columns that are redundant based on the selected taxonomy
     return columns.filter((col) => {
+      if (col.value === 'motifId' && taxonomyColumn === 'motif_id')
+        return false;
       if (
-        (col.value === 'protClass' || col.value === 'family') &&
-        taxonomyColumn === 'motif_alt_id'
+        col.value === 'motifAltId' &&
+        ['motif_alt_id', 'motif_id'].includes(taxonomyColumn)
       )
         return false;
-      if (col.value === 'protClass' && taxonomyColumn === 'family')
+      if (
+        col.value === 'family' &&
+        ['family', 'motif_alt_id', 'motif_id'].includes(taxonomyColumn)
+      )
         return false;
-      if (col.value === 'protClass' && taxonomyColumn === 'class') return false;
-      if (col.value === 'family' && taxonomyColumn === 'family') return false;
-      if (col.value === 'motifAltId' && taxonomyColumn === 'motif_alt_id')
+      if (
+        col.value === 'protClass' &&
+        ['class', 'family', 'motif_alt_id', 'motif_id'].includes(taxonomyColumn)
+      )
         return false;
-      if (col.value === 'motifId' && taxonomyColumn === 'motif_alt_id')
-        return false; // Hide Motif ID if TF Name is selected
       return true;
     });
   };
@@ -423,27 +411,30 @@ const DataTableMotif = () => {
       </div>
 
       <div ref={filtersRef}>
-        <div className="row mb-4">
-          <div className="col position-relative">
-            <label htmlFor="assembly">Assembly</label>
-            <input
-              type="text"
-              id="assembly"
-              className="form-control"
-              value={assembly}
-              onChange={(e) =>
-                handleAutosuggestChange(e, 'assembly', setAssembly)
-              }
-              autoComplete="off"
-            />
-            {activeSuggestionBox === 'assembly' && suggestions.length > 0 && (
-              <SuggestionList
-                suggestions={suggestions}
-                onSuggestionClick={(s) => handleSuggestionClick(s, setAssembly)}
+        <div className={!filtersVisible ? 'd-none' : ''}>
+          <div className="row mb-4">
+            <div className="col position-relative">
+              <label htmlFor="assembly">Assembly</label>
+              <input
+                type="text"
+                id="assembly"
+                className="form-control"
+                value={assembly}
+                onChange={(e) =>
+                  handleAutosuggestChange(e, 'assembly', setAssembly)
+                }
+                autoComplete="off"
               />
-            )}
-          </div>
-          {taxonomyColumn !== 'motif_alt_id' && (
+              {activeSuggestionBox === 'assembly' && suggestions.length > 0 && (
+                <SuggestionList
+                  suggestions={suggestions}
+                  onSuggestionClick={(s) =>
+                    handleSuggestionClick(s, setAssembly)
+                  }
+                />
+              )}
+            </div>
+
             <div className="col position-relative">
               <label htmlFor="motifId">Motif ID</label>
               <input
@@ -454,6 +445,7 @@ const DataTableMotif = () => {
                 onChange={(e) =>
                   handleAutosuggestChange(e, 'motifId', setMotifId)
                 }
+                readOnly={taxonomyColumn === 'motif_id'}
                 autoComplete="off"
               />
               {activeSuggestionBox === 'motifId' && suggestions.length > 0 && (
@@ -465,25 +457,22 @@ const DataTableMotif = () => {
                 />
               )}
             </div>
-          )}
-          <div className="col">
-            <label htmlFor="matchedSequence"> Matched Sequence </label>
-            <input
-              type="text"
-              id="matchedSequence"
-              className="form-control"
-              value={matchedSequence}
-              onChange={(e) => {
-                const lettersOnly = e.target.value.replace(/[^a-zA-Z]/g, '');
-                setMatchedSequence(lettersOnly);
-              }}
-            />
-          </div>
-        </div>
-      </div>
 
-      {filtersVisible && (
-        <div>
+            <div className="col">
+              <label htmlFor="matchedSequence"> Matched Sequence </label>
+              <input
+                type="text"
+                id="matchedSequence"
+                className="form-control"
+                value={matchedSequence}
+                onChange={(e) => {
+                  const lettersOnly = e.target.value.replace(/[^a-zA-Z]/g, '');
+                  setMatchedSequence(lettersOnly);
+                }}
+              />
+            </div>
+          </div>
+
           <div className="row mb-4">
             <div className="col">
               <label htmlFor="sequenceName"> Chromosome </label>
@@ -494,6 +483,7 @@ const DataTableMotif = () => {
                 value={sequenceName}
                 onChange={(e) => setSequenceName(e.target.value)}
               />
+
               <div className="col position-relative mt-2">
                 <label htmlFor="motifAltId"> TF Name </label>
                 <input
@@ -504,7 +494,9 @@ const DataTableMotif = () => {
                   onChange={(e) =>
                     handleAutosuggestChange(e, 'motifAltId', setMotifAltId)
                   }
-                  readOnly={taxonomyColumn === 'motif_alt_id'}
+                  readOnly={['motif_alt_id', 'motif_id'].includes(
+                    taxonomyColumn
+                  )}
                   autoComplete="off"
                 />
                 {activeSuggestionBox === 'motifAltId' &&
@@ -518,6 +510,7 @@ const DataTableMotif = () => {
                   )}
               </div>
             </div>
+
             <div className="col">
               <label htmlFor="queryStart"> Start </label>
               <input
@@ -584,12 +577,12 @@ const DataTableMotif = () => {
                 className="form-control"
                 placeholder="Min"
                 value={scoreRange.min}
-                onChange={(e) => {
+                onChange={(e) =>
                   setScoreRange({
                     ...scoreRange,
                     min: Math.max(0, Math.min(100, Number(e.target.value))),
-                  });
-                }}
+                  })
+                }
               />
               <input
                 type="number"
@@ -597,12 +590,12 @@ const DataTableMotif = () => {
                 className="form-control mt-2"
                 placeholder="Max"
                 value={scoreRange.max}
-                onChange={(e) => {
+                onChange={(e) =>
                   setScoreRange({
                     ...scoreRange,
                     max: Math.max(0, Math.min(100, Number(e.target.value))),
-                  });
-                }}
+                  })
+                }
               />
             </div>
             <div className="col">
@@ -664,9 +657,12 @@ const DataTableMotif = () => {
                 onChange={(e) =>
                   handleAutosuggestChange(e, 'protClass', setProtClass)
                 }
-                readOnly={['class', 'family', 'motif_alt_id'].includes(
-                  taxonomyColumn
-                )}
+                readOnly={[
+                  'class',
+                  'family',
+                  'motif_alt_id',
+                  'motif_id',
+                ].includes(taxonomyColumn)}
                 autoComplete="off"
               />
               {activeSuggestionBox === 'protClass' &&
@@ -689,7 +685,9 @@ const DataTableMotif = () => {
                 onChange={(e) =>
                   handleAutosuggestChange(e, 'family', setFamily)
                 }
-                readOnly={['family', 'motif_alt_id'].includes(taxonomyColumn)}
+                readOnly={['family', 'motif_alt_id', 'motif_id'].includes(
+                  taxonomyColumn
+                )}
                 autoComplete="off"
               />
               {activeSuggestionBox === 'family' && suggestions.length > 0 && (
@@ -701,7 +699,8 @@ const DataTableMotif = () => {
             </div>
           </div>
         </div>
-      )}
+      </div>
+
       <div className="text-center mb-4 d-flex gap-4 justify-content-center">
         <button
           className="btn btn-primary rounded-pill shadow-sm"
@@ -793,11 +792,13 @@ const DataTableMotif = () => {
         <table className="table table-bordered table-striped table-hover shadow-sm">
           <thead className="thead-dark text-center">
             <tr>
-              {/* MODIFICATION: Table headers now use the same conditional logic */}
+              {columnsVisibility.motifId && taxonomyColumn !== 'motif_id' && (
+                <th>Motif ID</th>
+              )}
               {columnsVisibility.motifAltId &&
-                taxonomyColumn !== 'motif_alt_id' && <th>TF Name </th>}
-              {columnsVisibility.motifId &&
-                taxonomyColumn !== 'motif_alt_id' && <th>Motif ID</th>}
+                !['motif_alt_id', 'motif_id'].includes(taxonomyColumn) && (
+                  <th>TF Name</th>
+                )}
               {columnsVisibility.sequenceName && <th>Chromosome </th>}
               {columnsVisibility.start && <th>Start </th>}
               {columnsVisibility.stop && <th>End </th>}
@@ -828,13 +829,13 @@ const DataTableMotif = () => {
               )}
               {columnsVisibility.matchedSequence && <th>Matched Sequence </th>}
               {columnsVisibility.protClass &&
-                !['class', 'family', 'motif_alt_id'].includes(
+                !['class', 'family', 'motif_alt_id', 'motif_id'].includes(
                   taxonomyColumn
                 ) && <th>TF Class </th>}
               {columnsVisibility.family &&
-                !['family', 'motif_alt_id'].includes(taxonomyColumn) && (
-                  <th>Family </th>
-                )}
+                !['family', 'motif_alt_id', 'motif_id'].includes(
+                  taxonomyColumn
+                ) && <th>Family </th>}
               {columnsVisibility.species && <th>Assembly </th>}
             </tr>
           </thead>
@@ -842,9 +843,7 @@ const DataTableMotif = () => {
             {loading ? (
               <tr>
                 <td
-                  colSpan={
-                    Object.values(columnsVisibility).filter((v) => v).length
-                  }
+                  colSpan={getSelectableColumns().length}
                   className="text-center"
                 >
                   <div className="spinner-border text-primary" role="status">
@@ -855,9 +854,7 @@ const DataTableMotif = () => {
             ) : data?.length === 0 ? (
               <tr>
                 <td
-                  colSpan={
-                    Object.values(columnsVisibility).filter((v) => v).length
-                  }
+                  colSpan={getSelectableColumns().length}
                   className="no-data-row"
                 >
                   No data found
@@ -866,13 +863,11 @@ const DataTableMotif = () => {
             ) : (
               data.map((item, index) => (
                 <tr key={index}>
-                  {columnsVisibility.motifAltId &&
-                    taxonomyColumn !== 'motif_alt_id' && (
-                      <td>{item.motif_alt_id}</td>
-                    )}
                   {columnsVisibility.motifId &&
-                    taxonomyColumn !== 'motif_alt_id' && (
-                      <td>{item.motif_id}</td>
+                    taxonomyColumn !== 'motif_id' && <td>{item.motif_id}</td>}
+                  {columnsVisibility.motifAltId &&
+                    !['motif_alt_id', 'motif_id'].includes(taxonomyColumn) && (
+                      <td>{item.motif_alt_id}</td>
                     )}
                   {columnsVisibility.sequenceName && (
                     <td>{item.sequence_name}</td>
@@ -893,20 +888,15 @@ const DataTableMotif = () => {
                     <td>{item.matched_sequence.toUpperCase()}</td>
                   )}
                   {columnsVisibility.protClass &&
-                    !['class', 'family', 'motif_alt_id'].includes(
+                    !['class', 'family', 'motif_alt_id', 'motif_id'].includes(
                       taxonomyColumn
                     ) && <td>{item.class}</td>}
                   {columnsVisibility.family &&
-                    !['family', 'motif_alt_id'].includes(taxonomyColumn) && (
-                      <td>{item.family}</td>
-                    )}
+                    !['family', 'motif_alt_id', 'motif_id'].includes(
+                      taxonomyColumn
+                    ) && <td>{item.family}</td>}
                   {columnsVisibility.species && (
-                    <td
-                      className="td_cursor"
-                      onClick={() =>
-                        handleSpeciesClick(item.assembly_accession)
-                      }
-                    >
+                    <td className="td_cursor">
                       <a
                         href={`https://www.ncbi.nlm.nih.gov/datasets/genome/${item.assembly_accession}/`}
                         target="_blank"
@@ -923,68 +913,21 @@ const DataTableMotif = () => {
         </table>
       </div>
 
-      {motifDetails && (
-        <div className="modal-overlay" onClick={() => setMotifDetails(null)}>
-          <div className="modal-container" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
-              <h5 className="modal-title"> {motifDetails?.name} </h5>
-              <button
-                type="button"
-                className="modal-close-btn"
-                onClick={() => setMotifDetails(null)}
-              >
-                X
-              </button>
-            </div>
-            <div className="modal-body">
-              {motifDetails?.matrix_id && (
-                <div className="modal-logo">
-                  <img
-                    src={`${urls?.JASPAR_LOGOS_URL}${motifDetails?.matrix_id}.svg`}
-                    alt={`${motifDetails?.name} Logo`}
-                    className="modal-logo-img"
-                  />
-                </div>
-              )}
-              <p>
-                <strong>Transcription Factor Class: </strong>
-                {motifDetails?.class_column}
-              </p>
-              <p>
-                <strong>Family: </strong> {motifDetails?.family}
-              </p>
-              <p>
-                <strong>Species: </strong> {motifDetails?.species}
-              </p>
-              <a
-                href={`${urls?.JASPAR_URL}${motifDetails?.matrix_id}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="modal-link"
-              >
-                More Info
-              </a>
-            </div>
-          </div>
-        </div>
-      )}
-
       <div className="pagination-controls text-center mt-4 d-flex justify-content-center align-items-center">
         <button
-          className="btn btn-outline-primary me-2"
+          className="btn btn-primary me-2"
           onClick={() => setPage(1)}
           disabled={page === 1 || loading}
         >
           First
         </button>
         <button
-          className="btn btn-outline-primary"
+          className="btn btn-primary"
           onClick={() => setPage(Math.max(page - 1, 1))}
           disabled={page === 1 || loading}
         >
           Previous
         </button>
-
         <span className="mx-3">
           Page{' '}
           {isPageInputActive ? (
@@ -995,13 +938,13 @@ const DataTableMotif = () => {
               style={{ width: '70px', textAlign: 'center' }}
               value={goToPageInput}
               onChange={(e) => setGoToPageInput(e.target.value)}
-              onBlur={handleGoToPage} // Triggers when clicking away
+              onBlur={handleGoToPage}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') handleGoToPage();
                 if (e.key === 'Escape') setIsPageInputActive(false);
               }}
               min="1"
-              max={totalRecords}
+              max={totalPages}
             />
           ) : (
             <span
@@ -1017,20 +960,19 @@ const DataTableMotif = () => {
               {page}
             </span>
           )}{' '}
-          of {totalRecords > 0 ? totalRecords : 1}
+          of {totalPages > 0 ? totalPages : 1}
         </span>
-
         <button
-          className="btn btn-outline-primary"
-          onClick={() => setPage(Math.min(page + 1, totalRecords))}
-          disabled={page === totalRecords || totalRecords === 0 || loading}
+          className="btn btn-primary"
+          onClick={() => setPage(Math.min(page + 1, totalPages))}
+          disabled={page === totalPages || totalPages === 0 || loading}
         >
           Next
         </button>
         <button
-          className="btn btn-outline-primary ms-2"
-          onClick={() => setPage(totalRecords)}
-          disabled={page === totalRecords || totalRecords === 0 || loading}
+          className="btn btn-primary ms-2"
+          onClick={() => setPage(totalPages)}
+          disabled={page === totalPages || totalPages === 0 || loading}
         >
           Last
         </button>

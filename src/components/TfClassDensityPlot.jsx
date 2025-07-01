@@ -6,6 +6,10 @@ import Select from 'react-select';
 import genomeHitsData from '../constants/static/genome_tf_hit.json';
 import assemblyMetadata from '../constants/static/joined.json';
 import motifMetadata from '../constants/static/motif_metadata.json';
+// --- MODIFICATION START ---
+// Import the file containing lists of empty classes and families
+import emptyData from '../constants/static/empty_classes_families.json';
+// --- MODIFICATION END ---
 
 // Helper function to calculate the median of an array of numbers
 const calculateMedian = (arr) => {
@@ -17,13 +21,18 @@ const calculateMedian = (arr) => {
     : (sorted[mid - 1] + sorted[mid]) / 2;
 };
 
-// Prepare TF Class options once, outside the component, for efficiency
-const tfClassOptions = [...new Set(motifMetadata.map((m) => m.tf_class))].map(
-  (tfClass) => ({
+// --- MODIFICATION START ---
+// Create a Set of empty TF classes for efficient filtering.
+const emptyClassSet = new Set(emptyData.empty_tf_classes);
+
+// Prepare TF Class options once, filtering out the empty classes.
+const tfClassOptions = [...new Set(motifMetadata.map((m) => m.tf_class))]
+  .filter((tfClass) => !emptyClassSet.has(tfClass)) // Exclude if the class is in the set
+  .map((tfClass) => ({
     value: tfClass,
     label: tfClass,
-  })
-);
+  }));
+// --- MODIFICATION END ---
 
 const TfClassDensityPlot = () => {
   const [plotData, setPlotData] = useState([]);

@@ -1,0 +1,19 @@
+{
+    "empty_tf_classes": [
+      "ARID",
+      "CRC domain",
+      "SAND domain factors",
+      "TATA-binding proteins"
+    ],
+    "empty_tf_families": [
+      "ARID-related",
+      "B-ATF-related factors",
+      "CSL-related factors",
+      "GMEB",
+      "HD-ZF factors",
+      "HMGA",
+      "TBP-related factors",
+      "tesmin/TSO1-family"
+    ]
+  }
+  

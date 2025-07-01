@@ -1,77 +1,115 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import CustomDropdown from './shared/Dropdown';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/Home_Components.css';
 import backgroundImages from '../constants/backgroundImages';
-import { species_categories, t2t_ids } from '../constants/categories';
-import { genus_family } from '../constants/genus_family';
+
+// Import new data source from static JSON files
+import assemblyMetadata from '../constants/static/joined.json';
+// import motifMetadata from '../constants/static/motif_metadata.json'; // Not needed for this component yet
 
 const SpeciesCategories = () => {
-  const [selectedCategory, setSelectedCategory] = useState('order'); // Default category (lowercase)
-  const categoryData = species_categories;
-  const [items, setItems] = useState([]);
-  const [additionalItems, setAdditionalItems] = useState(categoryData['order']);
-  const [selectedAdditionalItem, setSelectedAdditionalItem] = useState('');
-  const [loading, setLoading] = useState(false); // Loader state
   const navigate = useNavigate();
 
+  // Process the assembly metadata once and memoize the result
+  const { categoryData, familyLookup } = useMemo(() => {
+    const order = new Set();
+    const family = new Set();
+    const genus = new Set();
+    const species = new Set();
+    const familyLookup = {}; // Maps species/genus -> family for background images
+
+    assemblyMetadata.forEach((item) => {
+      if (item.order) order.add(item.order);
+      if (item.family) family.add(item.family);
+      if (item.genus) genus.add(item.genus);
+      if (item.species) species.add(item.species);
+
+      // Populate lookup maps for background images
+      if (item.species) {
+        familyLookup[item.species] = item.family;
+      }
+      if (item.genus) {
+        familyLookup[item.genus] = item.family;
+      }
+    });
+
+    const t2tSpeciesList = assemblyMetadata
+      .filter((item) => item.species && item.species.endsWith(' T2T'))
+      .map((item) => item.species);
+
+    return {
+      categoryData: {
+        order: [...order].sort(),
+        family: [...family].sort(),
+        genus: [...genus].sort(),
+        species: [...species].sort(),
+        't2t species': t2tSpeciesList.sort(),
+      },
+      familyLookup,
+    };
+  }, []);
+
+  const [selectedCategory, setSelectedCategory] = useState('order');
+  const [items, setItems] = useState([]);
+  const [additionalItems, setAdditionalItems] = useState([]);
+  const [selectedAdditionalItem, setSelectedAdditionalItem] = useState('');
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
-    // Initialize with the default category 'order'
     const initialItems = categoryData['order'] || [];
-    setItems(initialItems.slice(0, 4)); // Show the first 4 items
-    setAdditionalItems(initialItems.slice(4)); // Store the remaining items
-  }, []); // Removed categoryData from dependency array to run only once on mount
+    setItems(initialItems.slice(0, 4));
+    setAdditionalItems(initialItems.slice(4));
+  }, [categoryData]);
 
-  // Handle category change
-  const handleCategoryChange = (category, data = categoryData) => {
+  const handleCategoryChange = (category) => {
     const lowercasedCategory = category.toLowerCase();
-    setSelectedCategory(lowercasedCategory); // Update main category
-    const items = data[lowercasedCategory] || [];
-    setItems(items.slice(0, 4)); // Show the first 4 items
-    setAdditionalItems(items.slice(4)); // Store the remaining items
-    setSelectedAdditionalItem(''); // Reset the additional dropdown
+    setSelectedCategory(lowercasedCategory);
+    const newItems = categoryData[lowercasedCategory] || [];
+    setItems(newItems.slice(0, 4));
+    setAdditionalItems(newItems.slice(4));
+    setSelectedAdditionalItem('');
   };
 
-  // Handle additional item selection
-  const handleAdditionalItemSelect = (item) => {
-    setItems((prevItems) => [...prevItems, item]);
+  // MODIFICATION: Reverted to only handle single item selection
+  const handleAdditionalItemSelect = (selectedItem) => {
+    // Move the selected item from additionalItems to items
+    setItems((prevItems) => [...prevItems, selectedItem]);
     setAdditionalItems((prevAdditionalItems) =>
-      prevAdditionalItems.filter((additionalItem) => additionalItem !== item)
+      prevAdditionalItems.filter(
+        (additionalItem) => additionalItem !== selectedItem
+      )
     );
-    setSelectedAdditionalItem(item); // Set the selected additional item
+    setSelectedAdditionalItem(selectedItem);
   };
 
-  // Navigate to a new page on card click
   const handleCardClick = useCallback(
     (item) => {
-      const taxonomyColumn = selectedCategory;
       const taxonomyValue = item;
-      // handle case for selected category = t2t species
-      if (selectedCategory === 't2t species') {
-        navigate(
-          `/explore?species_id=${t2t_ids[taxonomyValue]}&species_name=${taxonomyValue}`
-        );
-      } else {
-        // This 'else' block now correctly handles "Family", "Order", "Genus", and "Species"
-        // Redirect to /explore with query parameters
-        navigate(
-          `/explore?taxonomy_column=${taxonomyColumn.toLowerCase()}&taxonomy_value=${taxonomyValue}`
-        );
-      }
+      const taxonomyColumn =
+        selectedCategory === 't2t species' ? 'species' : selectedCategory;
+
+      navigate(
+        `/explore?taxonomy_column=${taxonomyColumn.toLowerCase()}&taxonomy_value=${taxonomyValue}`
+      );
     },
     [selectedCategory, navigate]
   );
 
-  // Find Background Image
-  const getBackgroundImage = (item) => {
-    if (backgroundImages?.[item]) return backgroundImages?.[item];
-    else return backgroundImages?.[genus_family[item]];
-  };
+  const getBackgroundImage = useCallback(
+    (item) => {
+      const baseItem = item.replace(' T2T', '');
+      return (
+        backgroundImages?.[baseItem] ??
+        backgroundImages?.[familyLookup[baseItem]]
+      );
+    },
+    [familyLookup]
+  );
 
   return (
     <div className="container">
-      {/* Loader */}
       {loading ? (
         <div
           className="d-flex justify-content-center align-items-center"
@@ -90,41 +128,32 @@ const SpeciesCategories = () => {
           <h2 className="text-center mb-4 fancy-title-medium">
             Explore Species Categories
           </h2>
-
-          {/* Explanatory Text */}
           <p className="explanation-text">
             Use the dropdown below to select a category like "Family", "Order",
             "Genus", "Species", or "T2T Species". Once a category is selected,
             popular species from that category will appear below. You can also
             select additional species using the "Select More" dropdown.
           </p>
-
-          {/* Dropdown for selecting category */}
           <div className="d-flex justify-content-center mb-4 mt-4">
             <div className="dropdown-container">
               <CustomDropdown
-                // MODIFICATION: Added "Species" to the options array
                 options={['Family', 'Order', 'Genus', 'Species', 'T2T Species']}
                 defaultOption={'Order'}
-                onOptionSelect={
-                  (selected) => handleCategoryChange(selected) // No need for toLowerCase() here if handled in the function
-                }
+                onOptionSelect={handleCategoryChange}
                 showInput={false}
               />
               <small className="dropdown-hint">
                 Choose a category to explore.
               </small>
             </div>
-
-            {/* Dropdown for additional items */}
+            {/* Conditionally render the "Select More" dropdown */}
             {additionalItems.length > 0 && (
               <div className="dropdown-container">
                 <CustomDropdown
+                  // MODIFICATION: Options are just the additional items, no "Add All"
                   options={additionalItems}
                   defaultOption={selectedAdditionalItem || 'Select More'}
-                  onOptionSelect={(selectedItem) =>
-                    handleAdditionalItemSelect(selectedItem)
-                  }
+                  onOptionSelect={handleAdditionalItemSelect}
                 />
                 <small className="dropdown-hint">
                   Add more items to the list.
@@ -132,8 +161,6 @@ const SpeciesCategories = () => {
               </div>
             )}
           </div>
-
-          {/* Cards for the most common items */}
           {items.length > 0 && (
             <div className="row justify-content-center mt-4">
               {items.map((item, index) => (
