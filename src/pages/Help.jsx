@@ -366,13 +366,10 @@ const Help = () => {
           <div className="chart-card">
             <h3>Motif Density Bar Chart</h3>
             <p>
-              This interactive bar chart allows for a detailed, drill-down
-              exploration of transcription factor hit counts. Initially, it
+              This  bar chart allows for a detailed
+              exploration of transcription factor density across species per selected motif. Initially, it
               displays the total counts aggregated at the highest level (e.g.,
-              TF Class). By clicking on a bar, you can progressively drill down
-              into finer categories, such as TF Family and then individual TF
-              Motifs. A back button facilitates returning to previous levels,
-              enabling a comprehensive analysis of the motif hierarchy.
+              TF Class). 
             </p>
             <img
               src="/images/help_explorer/barchart_placeholder.png"
