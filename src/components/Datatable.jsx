@@ -353,21 +353,23 @@ const DataTable = () => {
 
   const [motifDetails, setMotifDetails] = useState(null);
 
-  const fetchMotifDetails = async (motifId) => {
-    try {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/motif_metadata/${motifId}`
-      );
-      const result = await response.json();
-      setMotifDetails(result);
-    } catch (error) {
-      console.error('Error fetching motif details:', error);
+  // --- MODIFICATION START ---
+  // The fetchMotifDetails function is removed and its logic is integrated
+  // into handleMotifClick to use the locally imported 'protein' JSON data.
+  const handleMotifClick = (motifId) => {
+    // Find the motif details from the imported 'protein' JSON data.
+    const details = protein.find((p) => p.motif_id === motifId);
+
+    if (details) {
+      setMotifDetails(details);
+    } else {
+      // Log an error if the motif ID is not found in the local data.
+      console.error(`Details for motif ID ${motifId} not found in local JSON.`);
+      // Ensure the modal doesn't show or shows an error state.
+      setMotifDetails(null);
     }
   };
-
-  const handleMotifClick = (motifId) => {
-    fetchMotifDetails(motifId);
-  };
+  // --- MODIFICATION END ---
 
   const handleDownload = async (format) => {
     setLoading(true);
